@@ -68,6 +68,7 @@
     <Compile Include="AddEditEmployee.Designer.cs">
       <DependentUpon>AddEditEmployee.cs</DependentUpon>
     </Compile>
+    <Compile Include="Database.cs" />
     <Compile Include="DatabaseClassesDataContext.cs">
       <DependentUpon>DatabaseClassesDataContext.dbml</DependentUpon>
     </Compile>
