@@ -1,0 +1,180 @@
+USE [assignment1]
+GO
+
+/****** Object:  Table [dbo].[project]    Script Date: 23-10-2016 21:24:40 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[project](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[name] [nchar](30) NOT NULL,
+	[buget] [float] NOT NULL,
+	[allocated_hours] [float] NOT NULL,
+	[headquarters_id] [int] NOT NULL,
+ CONSTRAINT [PK_project] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+
+USE [assignment1]
+GO
+
+/****** Object:  Table [dbo].[headquarter]    Script Date: 23-10-2016 21:24:37 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[headquarter](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[building_name] [nchar](25) NOT NULL,
+	[rooms] [int] NOT NULL,
+	[rent] [float] NOT NULL,
+	[country] [nchar](25) NOT NULL,
+	[city] [nchar](25) NOT NULL,
+	[street] [nchar](25) NOT NULL,
+	[number] [int] NOT NULL,
+	[postal_code] [nchar](25) NOT NULL,
+ CONSTRAINT [PK_headquarter] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+
+USE [assignment1]
+GO
+
+/****** Object:  Table [dbo].[employee_residence]    Script Date: 23-10-2016 21:24:33 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[employee_residence](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[employee_id] [int] NOT NULL,
+	[country] [nchar](25) NOT NULL,
+	[city] [nchar](25) NOT NULL,
+	[street] [nchar](25) NOT NULL,
+	[number] [int] NOT NULL,
+	[postal_code] [nchar](25) NOT NULL,
+	[current_residence] [bit] NOT NULL,
+ CONSTRAINT [PK_employee_residence] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+
+USE [assignment1]
+GO
+
+/****** Object:  Table [dbo].[employee_position]    Script Date: 23-10-2016 21:24:29 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[employee_position](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[employee_id] [int] NOT NULL,
+	[name] [nchar](30) NOT NULL,
+	[description] [ntext] NOT NULL,
+	[hour_fee] [float] NOT NULL,
+	[project_id] [int] NULL,
+ CONSTRAINT [PK_employee_position] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+GO
+
+
+USE [assignment1]
+GO
+
+/****** Object:  Table [dbo].[employee]    Script Date: 23-10-2016 21:24:26 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[employee](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[bsn] [int] NOT NULL,
+	[name] [nchar](30) NOT NULL,
+	[surname] [nchar](30) NOT NULL,
+	[headquarter_id] [int] NOT NULL,
+ CONSTRAINT [PK_employee] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+
+USE [assignment1]
+GO
+
+/****** Object:  Table [dbo].[degree_employee]    Script Date: 23-10-2016 21:24:21 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[degree_employee](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[employee_id] [int] NOT NULL,
+	[degree_id] [int] NOT NULL,
+ CONSTRAINT [PK_degree_employee] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+
+USE [assignment1]
+GO
+
+/****** Object:  Table [dbo].[degree]    Script Date: 23-10-2016 21:24:16 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[degree](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[course] [nchar](25) NOT NULL,
+	[school] [nchar](40) NOT NULL,
+	[level] [nchar](20) NOT NULL,
+ CONSTRAINT [PK_degree] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+
+
