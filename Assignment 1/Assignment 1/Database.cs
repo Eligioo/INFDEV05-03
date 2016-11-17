@@ -10,7 +10,7 @@ namespace Assignment_1
 {
     public class Database
     {
-        string SQLConnect = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" + @"C:\Users\zEz\Source\Repos\INFDEV03-5\Assignment 1\Assignment 1\assignment1.mdf" + @";Integrated Security=True";
+        string SQLConnect = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" + @".\assignment1.mdf" + @";Integrated Security=True";
         SqlConnection connection;
         SqlDataReader sql_reader;
         SqlCommand sql_command;
