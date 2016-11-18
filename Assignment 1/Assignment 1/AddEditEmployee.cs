@@ -15,7 +15,7 @@ namespace Assignment_1
     {
         DBHelper db1 = new DBHelper();
         DatabaseClassesDataContextDataContext db = new DatabaseClassesDataContextDataContext();
-        Assignment_1.employee result;
+        Assignment_1.User result;
         int employeeBsn;
         public AddEditEmployee(int employeeBsn)
         {
@@ -37,14 +37,10 @@ namespace Assignment_1
 
         private void GetEmployeeData(int employeeBsn)
         {
-            var employee =
-                    from e in db.employees
-                    where e.bsn == employeeBsn
-                    select e;
-            result = employee.First();
-            name.Text = result.name.TrimEnd();
-            surname.Text = result.surname.TrimEnd();
-            bsn.Text = result.bsn.ToString().TrimEnd();
+            result = db1.getSingleUser(employeeBsn)[0];
+            name.Text = result.Name.TrimEnd();
+            surname.Text = result.Surname.TrimEnd();
+            bsn.Text = result.Bsn.ToString().TrimEnd();
         }
 
         private void CancelBtn_Click(object sender, EventArgs e)
@@ -54,31 +50,23 @@ namespace Assignment_1
 
         private void SaveBtn_Click(object sender, EventArgs e)
         {
+            User u = new Assignment_1.User();
+            u.Bsn = bsn.Text;
+            u.Name = name.Text;
+            u.Surname = surname.Text;
+            u.Id = null;
+            u.Headquarter_Id = comboBox1.SelectedValue.ToString();
             if (employeeBsn == 0)
             {
-                User u = new Assignment_1.User();
-                u.Bsn = bsn.Text;
-                u.Name = name.Text;
-                u.Surname = surname.Text;
-                u.Id = null;
-                u.Headquarter_Id = comboBox1.SelectedValue.ToString();
                 db1.addUser(u);
-                this.Close();
-                MessageBox.Show("Changes have been made.");
             }
             else
             {
-                var current_bsn = employeeBsn;
-                User u = new Assignment_1.User();
-                u.Bsn = bsn.Text;
-                u.Name = name.Text;
-                u.Surname = surname.Text;
-                u.Id = null;
-                u.Headquarter_Id = comboBox1.SelectedValue.ToString();
                 db1.editUser(u, employeeBsn);
-                this.Close();
-                MessageBox.Show("Changes have been made.");
             }
+            this.Close();
+            MessageBox.Show("Changes have been made.");
+            
         }
     }
 }

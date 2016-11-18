@@ -86,5 +86,19 @@ namespace Assignment_1
         {
 
         }
+
+        private void DeleteEmployeBtn_Click(object sender, EventArgs e)
+        {
+            if (EmployeesListBox.SelectedItems.Count == 1)
+            {
+                string item = EmployeesListBox.SelectedItem.ToString();
+                string bsn = item.Substring(item.Length - 6);
+                db1.deleteUser(Int32.Parse(bsn));
+                MessageBox.Show("Employee deleted");
+                Form1_Activated(sender, e);
+            }
+            else
+                MessageBox.Show("Select a person.");
+        }
     }
 }

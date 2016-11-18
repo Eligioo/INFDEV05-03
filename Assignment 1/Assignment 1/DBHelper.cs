@@ -37,6 +37,17 @@ namespace Assignment_1
             }
         }
 
+        public Boolean deleteUser(int bsn)
+        {
+            String query = "DELETE FROM employee WHERE bsn = '" + bsn + "'";
+            try { db.Update(query); return true; }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
+            }
+        }
+
         public List<User> getAllUsers() {
             String query = "SELECT * FROM employee";
             List < User >  result = db.Select(query);
@@ -45,5 +56,13 @@ namespace Assignment_1
             return result;
         }
 
+        public List<User> getSingleUser(int bsn)
+        {
+            String query = "SELECT * FROM employee WHERE bsn = '" + bsn + "'";
+            List<User> result = db.Select(query);
+            //parse to List User
+
+            return result;
+        }
     }
 }

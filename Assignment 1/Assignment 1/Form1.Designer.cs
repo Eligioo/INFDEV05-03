@@ -82,6 +82,7 @@
             this.DeleteEmployeBtn.TabIndex = 3;
             this.DeleteEmployeBtn.Text = "Delete";
             this.DeleteEmployeBtn.UseVisualStyleBackColor = true;
+            this.DeleteEmployeBtn.Click += new System.EventHandler(this.DeleteEmployeBtn_Click);
             // 
             // EmployeePropertiesLbl
             // 
