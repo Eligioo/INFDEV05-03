@@ -16,7 +16,7 @@ namespace Assignment_1
 
         public Boolean addUser(User u)
         {
-            String query = "INSERT INTO `employee`(`bsn`, `name`, `surname`) VALUES(`" + u.Bsn + "`, `" + u.Name + "`, `" + u.Surname + "`)";
+            String query = "INSERT INTO employee(bsn, name, surname, headquarter_id) VALUES('" + u.Bsn + "', '" + u.Name + "', '" + u.Surname + "', '" + u.Headquarter_Id + "')";
             try { db.Insert(query); return true; }
             catch (Exception e)
             {

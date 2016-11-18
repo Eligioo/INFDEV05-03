@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assignment_1.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,12 +19,18 @@ namespace Assignment_1
         public AddEditEmployee(int employeeBsn)
         {
             InitializeComponent();
-            if (employeeBsn == 0)
+            if (employeeBsn != 0)
             {
-                throw new NotImplementedException("Add employee");
-            }
-            else
                 GetEmployeeData(employeeBsn);
+            }
+            Headquarter hq = new Headquarter();
+            hq.Id = 2;
+            hq.Building_name = "Harvard";
+
+            comboBox1.DataSource = new BindingSource(hq, null);
+            comboBox1.DisplayMember = "Building_name";
+            comboBox1.ValueMember = "Id";
+            //comboBox1.Items.Add(hq);
         }
 
         private void GetEmployeeData(int employeeBsn)
@@ -46,6 +53,11 @@ namespace Assignment_1
         private void SaveBtn_Click(object sender, EventArgs e)
         {
             User u = new Assignment_1.User();
+            u.Bsn = bsn.Text;
+            u.Name = name.Text;
+            u.Surname = surname.Text;
+            u.Id = null;
+            u.Headquarter_Id = comboBox1.SelectedValue.ToString();
             db1.addUser(u);
             this.Close();
             MessageBox.Show("Changes have been made.");

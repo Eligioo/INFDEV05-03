@@ -67,6 +67,7 @@ namespace Assignment_1
                 }
                 resultList.Add(item);
             }
+            connection.Close();
             return resultList;
         }
 

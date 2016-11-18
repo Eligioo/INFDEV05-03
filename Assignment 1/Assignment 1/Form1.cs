@@ -18,7 +18,7 @@ namespace Assignment_1
         public Form1()
         {
             InitializeComponent();
-            db1.getAllUsers();
+            //db1.getAllUsers();
             GetEmployeesListbox();
             GetProjectsListbox();
         }
@@ -50,10 +50,10 @@ namespace Assignment_1
 
         private void GetEmployeesListbox()
         {
-            var employees = from a in db.employees select a;
+            var employees = db1.getAllUsers();
             foreach (var item in employees)
             {
-                EmployeesListBox.Items.AddRange(new object[] { item.name + " " + item.surname + " " + item.bsn.ToString() });
+                EmployeesListBox.Items.AddRange(new object[] { item.Name  + " " + item.Surname  + " " + item.Bsn });
             }
         }
 
