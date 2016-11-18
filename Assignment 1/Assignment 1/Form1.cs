@@ -21,6 +21,7 @@ namespace Assignment_1
             //db1.getAllUsers();
             GetEmployeesListbox();
             GetProjectsListbox();
+            db1.getAllProjects();
         }
 
         private void EditEmployeeBtn_Click(object sender, EventArgs e)

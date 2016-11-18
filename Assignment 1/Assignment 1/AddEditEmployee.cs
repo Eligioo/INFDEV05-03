@@ -55,7 +55,10 @@ namespace Assignment_1
             u.Name = name.Text;
             u.Surname = surname.Text;
             u.Id = null;
-            u.Headquarter_Id = comboBox1.SelectedValue.ToString();
+            if (comboBox1.SelectedValue != null)
+            {
+                u.Headquarter_Id = comboBox1.SelectedValue.ToString();
+            }
             if (employeeBsn == 0)
             {
                 db1.addUser(u);

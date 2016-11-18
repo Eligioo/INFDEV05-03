@@ -19,7 +19,7 @@ namespace Assignment_1
 
     public class Database<T> where T : new()
     {
-        string SQLConnect = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename='C:\Users\zEz\Source\Repos\NewRepo\Assignment 1\Assignment 1\assignment1.mdf';Integrated Security=True";
+        string SQLConnect = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename='C:\Users\zEz\Source\Repos\INFDEV05-03\Assignment 1\Assignment 1\assignment1.mdf';Integrated Security=True";
         SqlConnection connection;
         SqlDataReader sql_reader;
         SqlCommand sql_command;

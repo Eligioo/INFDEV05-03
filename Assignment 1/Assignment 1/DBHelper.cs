@@ -9,9 +9,11 @@ namespace Assignment_1
     class DBHelper
     {
         Database<User> db;
+        Database<Project> db_2;
         public DBHelper()
         {
             db = new Database<User>();
+            db_2 = new Database<Project>();
         }
 
         public Boolean addUser(User u)
@@ -53,6 +55,15 @@ namespace Assignment_1
             List < User >  result = db.Select(query);
             //parse to List User
             
+            return result;
+        }
+
+        public List<Project> getAllProjects()
+        {
+            String query = "SELECT * FROM project";
+            List<Project> result = db_2.Select(query);
+            //parse to List User
+
             return result;
         }
 
