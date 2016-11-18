@@ -60,20 +60,10 @@ namespace Assignment_1
 
         private void GetProjectsListbox()
         {
-            var projects =
-                   from p in db.projects
-                   join h in db.headquarters
-                   on p.headquarters_id equals h.id
-                   into a
-                   from b in a.DefaultIfEmpty()
-                   select new
-                   {
-                       p.name,
-                       b.building_name
-                   };
+            var projects = db1.getAllProjects();
             foreach (var item in projects)
             {
-                ProjectsListBox.Items.AddRange(new object[] { item.name + " " + item.building_name });
+                ProjectsListBox.Items.AddRange(new object[] { item.Name + " "+ item.Id });
             }
         }
 
@@ -81,6 +71,9 @@ namespace Assignment_1
         {
             EmployeesListBox.Items.Clear();
             GetEmployeesListbox();
+
+            ProjectsListBox.Items.Clear();
+            GetProjectsListbox();
         }
 
         private void EmployeesListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -100,6 +93,44 @@ namespace Assignment_1
             }
             else
                 MessageBox.Show("Select a person.");
+        }
+
+        private void AddProjectBtn_Click(object sender, EventArgs e)
+        {
+            AddEditProject AddEditProject = new AddEditProject(0);
+            AddEditProject.Show();
+        }
+
+        private void EditProjectBtn_Click(object sender, EventArgs e)
+        {
+            if (ProjectsListBox.SelectedItems.Count == 1)
+            {
+                string item = ProjectsListBox.SelectedItem.ToString();
+                int id = Int32.Parse(item.Split(' ').Last());
+                AddEditProject AddEditProject = new AddEditProject(id);
+                AddEditProject.Show();
+            }
+            else
+                MessageBox.Show("Select a project");
+        }
+
+        private void DeleteProjectBtn_Click(object sender, EventArgs e)
+        {
+            if (ProjectsListBox.SelectedItems.Count == 1)
+            {
+                string item = ProjectsListBox.SelectedItem.ToString();
+                int id = Int32.Parse(item.Split(' ').Last());
+                if (db1.deleteProject(id))
+                {
+                    MessageBox.Show("Project deleted.");
+                }
+                else
+                    MessageBox.Show("Something went wrong!");
+
+
+            }
+            else
+                MessageBox.Show("Select a project.");
         }
     }
 }
