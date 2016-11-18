@@ -10,6 +10,7 @@ namespace Assignment_1
     {
         Database<User> user;
         Database<Project> project;
+        Database<Models.Headquarter> headquarter;
         public DBHelper()
         {
             user = new Database<User>();
@@ -119,6 +120,12 @@ namespace Assignment_1
                 Console.WriteLine(e.Message);
                 return false;
             }
+        }
+
+        public List<Models.Headquarter> getHeadquarterList()
+        {
+            String query = "SELECT * FROM headquarter";
+            return new List<Models.Headquarter>();
         }
     }
 }

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Assignment_1.Models;
 
 namespace Assignment_1
 {
@@ -14,6 +15,7 @@ namespace Assignment_1
     {
         DBHelper db1 = new DBHelper();
         Assignment_1.Project result;
+        List<Headquarter> hqList = new List<Headquarter>();
         private int projectId;
 
         public AddEditProject(int projectId)
@@ -32,6 +34,11 @@ namespace Assignment_1
             projectTextBox.Text = result.Name.Trim();
             budgetTextBox.Text = result.Buget.ToString().Trim();
             allocatedHoursTextBox.Text = result.Allocated_hours.ToString().Trim();
+        }
+
+        public void GetHeadquartersData()
+        {
+            hqList = db1.getHeadquarterList();
         }
 
         private void button2_Click_1(object sender, EventArgs e)
