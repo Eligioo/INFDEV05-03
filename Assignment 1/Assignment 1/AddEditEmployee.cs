@@ -14,7 +14,6 @@ namespace Assignment_1
     public partial class AddEditEmployee : Form
     {
         DBHelper db1 = new DBHelper();
-        DatabaseClassesDataContextDataContext db = new DatabaseClassesDataContextDataContext();
         Assignment_1.User result;
         int employeeBsn;
         public AddEditEmployee(int employeeBsn)

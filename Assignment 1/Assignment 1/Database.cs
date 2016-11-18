@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -19,7 +20,7 @@ namespace Assignment_1
 
     public class Database<T> where T : new()
     {
-        string SQLConnect = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename='"+ Environment.CurrentDirectory + @"\assignment1.mdf';Integrated Security=True";
+        string SQLConnect = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename='"+ Directory.GetParent(Environment.CurrentDirectory).Parent.FullName + @"\assignment1.mdf';Integrated Security=True";
 
         SqlConnection connection;
         SqlDataReader sql_reader;

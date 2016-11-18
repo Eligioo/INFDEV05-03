@@ -8,14 +8,14 @@ namespace Assignment_1
 {
     class Project : Object
     {
-        private String id;
+        private int id;
 
         private String name;
-        private String buget;
-        private String allocated_hours;
-        private String headquarters_id;
+        private float buget;
+        private float allocated_hours;
+        private int headquarters_id;
 
-        public string Id
+        public int Id
         {
             get
             {
@@ -28,7 +28,7 @@ namespace Assignment_1
             }
         }
 
-        public string Name
+        public String Name
         {
             get
             {
@@ -41,7 +41,7 @@ namespace Assignment_1
             }
         }
 
-        public string Buget
+        public float Buget
         {
             get
             {
@@ -54,7 +54,7 @@ namespace Assignment_1
             }
         }
 
-        public string Allocated_hours
+        public float Allocated_hours
         {
             get
             {
@@ -67,7 +67,7 @@ namespace Assignment_1
             }
         }
 
-        public string Headquarters_Id
+        public int Headquarters_Id
         {
             get
             {
