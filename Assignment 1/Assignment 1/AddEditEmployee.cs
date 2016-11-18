@@ -32,6 +32,8 @@ namespace Assignment_1
             comboBox1.DataSource = new BindingSource(hq, null);
             comboBox1.DisplayMember = "Building_name";
             comboBox1.ValueMember = "Id";
+
+            //residenceListbox.DataSource = new BindingSource()
             //comboBox1.Items.Add(hq);
         }
 
@@ -69,7 +71,35 @@ namespace Assignment_1
             }
             this.Close();
             MessageBox.Show("Changes have been made.");
-            
+        }
+
+        private void AddBtn_Click(object sender, EventArgs e)
+        {
+            if (residenceListbox.SelectedItems.Count == 1)
+            {
+                string item = residenceListbox.SelectedItem.ToString();
+                string bsn = item.Substring(item.Length - 6);
+                //AddEditEmployee AddEditEmployee = new AddEditEmployee(Int32.Parse(bsn));
+                //AddEditEmployee.Activated += AddEditEmployee_Activated;
+                //AddEditEmployee.Show();
+            }
+            else
+                MessageBox.Show("Select a person.");
+        }
+
+        private void SetBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void EditBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void DeleteBtn_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -75,5 +75,14 @@ namespace Assignment_1
 
             return result;
         }
+
+        public List<employee_residence> getSingleUser(int bsn)
+        {
+            String query = "SELECT * FROM employee WHERE bsn = '" + bsn + "'";
+            List<User> result = db.Select(query);
+            //parse to List User
+
+            return result;
+        }
     }
 }
