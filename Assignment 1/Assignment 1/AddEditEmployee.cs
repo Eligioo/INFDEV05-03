@@ -16,8 +16,10 @@ namespace Assignment_1
         DBHelper db1 = new DBHelper();
         DatabaseClassesDataContextDataContext db = new DatabaseClassesDataContextDataContext();
         Assignment_1.employee result;
+        int employeeBsn;
         public AddEditEmployee(int employeeBsn)
         {
+            this.employeeBsn = employeeBsn;
             InitializeComponent();
             if (employeeBsn != 0)
             {
@@ -52,15 +54,31 @@ namespace Assignment_1
 
         private void SaveBtn_Click(object sender, EventArgs e)
         {
-            User u = new Assignment_1.User();
-            u.Bsn = bsn.Text;
-            u.Name = name.Text;
-            u.Surname = surname.Text;
-            u.Id = null;
-            u.Headquarter_Id = comboBox1.SelectedValue.ToString();
-            db1.addUser(u);
-            this.Close();
-            MessageBox.Show("Changes have been made.");
+            if (employeeBsn == 0)
+            {
+                User u = new Assignment_1.User();
+                u.Bsn = bsn.Text;
+                u.Name = name.Text;
+                u.Surname = surname.Text;
+                u.Id = null;
+                u.Headquarter_Id = comboBox1.SelectedValue.ToString();
+                db1.addUser(u);
+                this.Close();
+                MessageBox.Show("Changes have been made.");
+            }
+            else
+            {
+                var current_bsn = employeeBsn;
+                User u = new Assignment_1.User();
+                u.Bsn = bsn.Text;
+                u.Name = name.Text;
+                u.Surname = surname.Text;
+                u.Id = null;
+                u.Headquarter_Id = comboBox1.SelectedValue.ToString();
+                db1.editUser(u, employeeBsn);
+                this.Close();
+                MessageBox.Show("Changes have been made.");
+            }
         }
     }
 }

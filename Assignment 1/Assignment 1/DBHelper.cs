@@ -26,6 +26,17 @@ namespace Assignment_1
             }
         }
 
+        public Boolean editUser(User u, int bsn)
+        {
+            String query = "UPDATE employee SET bsn = '" + u.Bsn +"', name = '" + u.Name +"', surname = '" + u.Surname +"', headquarter_id = '" + u.Headquarter_Id + "' WHERE bsn = '" + bsn + "'";
+            try { db.Update(query); return true; }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
+            }
+        }
+
         public List<User> getAllUsers() {
             String query = "SELECT * FROM employee";
             List < User >  result = db.Select(query);
