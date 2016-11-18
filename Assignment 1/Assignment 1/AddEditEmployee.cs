@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assignment_1.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,29 +13,34 @@ namespace Assignment_1
 {
     public partial class AddEditEmployee : Form
     {
+        DBHelper db1 = new DBHelper();
         DatabaseClassesDataContextDataContext db = new DatabaseClassesDataContextDataContext();
-        Assignment_1.employee result;
+        Assignment_1.User result;
+        int employeeBsn;
         public AddEditEmployee(int employeeBsn)
         {
+            this.employeeBsn = employeeBsn;
             InitializeComponent();
-            if (employeeBsn == 0)
+            if (employeeBsn != 0)
             {
-                throw new NotImplementedException("Add employee");
-            }
-            else
                 GetEmployeeData(employeeBsn);
+            }
+            Headquarter hq = new Headquarter();
+            hq.Id = 2;
+            hq.Building_name = "Harvard";
+
+            comboBox1.DataSource = new BindingSource(hq, null);
+            comboBox1.DisplayMember = "Building_name";
+            comboBox1.ValueMember = "Id";
+            //comboBox1.Items.Add(hq);
         }
 
         private void GetEmployeeData(int employeeBsn)
         {
-            var employee =
-                    from e in db.employees
-                    where e.bsn == employeeBsn
-                    select e;
-            result = employee.First();
-            name.Text = result.name.TrimEnd();
-            surname.Text = result.surname.TrimEnd();
-            bsn.Text = result.bsn.ToString().TrimEnd();
+            result = db1.getSingleUser(employeeBsn)[0];
+            name.Text = result.Name.TrimEnd();
+            surname.Text = result.Surname.TrimEnd();
+            bsn.Text = result.Bsn.ToString().TrimEnd();
         }
 
         private void CancelBtn_Click(object sender, EventArgs e)
@@ -44,12 +50,26 @@ namespace Assignment_1
 
         private void SaveBtn_Click(object sender, EventArgs e)
         {
-            result.bsn = Int32.Parse(bsn.Text);
-            result.name = name.Text;
-            result.surname = surname.Text;
-            db.SubmitChanges();
+            User u = new Assignment_1.User();
+            u.Bsn = bsn.Text;
+            u.Name = name.Text;
+            u.Surname = surname.Text;
+            u.Id = null;
+            if (comboBox1.SelectedValue != null)
+            {
+                u.Headquarter_Id = comboBox1.SelectedValue.ToString();
+            }
+            if (employeeBsn == 0)
+            {
+                db1.addUser(u);
+            }
+            else
+            {
+                db1.editUser(u, employeeBsn);
+            }
             this.Close();
             MessageBox.Show("Changes have been made.");
+            
         }
     }
 }

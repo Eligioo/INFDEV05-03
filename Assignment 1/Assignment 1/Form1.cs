@@ -13,27 +13,15 @@ namespace Assignment_1
 {
     public partial class Form1 : Form
     {
-        SqlConnection connection;
         DatabaseClassesDataContextDataContext db = new DatabaseClassesDataContextDataContext();
+        DBHelper db1 = new DBHelper();
         public Form1()
         {
             InitializeComponent();
-
-            string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" + @"D:\GitHub\INFDEV03-5\Assignment 1\Assignment 1\assignment1.mdf" + @";Integrated Security=True";
-            connection = new SqlConnection(connectionString);
-            try
-            {
-                connection.Open();
-                GetEmployeesListbox();
-                GetProjectsListbox();
-
-                connection.Close();
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.ToString());
-                //MessageBox.Show("Can't connect to database!");
-            }
+            //db1.getAllUsers();
+            GetEmployeesListbox();
+            GetProjectsListbox();
+            db1.getAllProjects();
         }
 
         private void EditEmployeeBtn_Click(object sender, EventArgs e)
@@ -63,10 +51,10 @@ namespace Assignment_1
 
         private void GetEmployeesListbox()
         {
-            var employees = from a in db.employees select a;
+            var employees = db1.getAllUsers();
             foreach (var item in employees)
             {
-                EmployeesListBox.Items.AddRange(new object[] { item.name + " " + item.surname + " " + item.bsn.ToString() });
+                EmployeesListBox.Items.AddRange(new object[] { item.Name  + " " + item.Surname  + " " + item.Bsn });
             }
         }
 
@@ -93,6 +81,25 @@ namespace Assignment_1
         {
             EmployeesListBox.Items.Clear();
             GetEmployeesListbox();
+        }
+
+        private void EmployeesListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void DeleteEmployeBtn_Click(object sender, EventArgs e)
+        {
+            if (EmployeesListBox.SelectedItems.Count == 1)
+            {
+                string item = EmployeesListBox.SelectedItem.ToString();
+                string bsn = item.Substring(item.Length - 6);
+                db1.deleteUser(Int32.Parse(bsn));
+                MessageBox.Show("Employee deleted");
+                Form1_Activated(sender, e);
+            }
+            else
+                MessageBox.Show("Select a person.");
         }
     }
 }

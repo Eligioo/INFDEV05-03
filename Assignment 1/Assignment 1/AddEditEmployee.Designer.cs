@@ -65,6 +65,7 @@
             // bsn
             // 
             this.bsn.Location = new System.Drawing.Point(15, 93);
+            this.bsn.MaxLength = 6;
             this.bsn.Name = "bsn";
             this.bsn.Size = new System.Drawing.Size(198, 20);
             this.bsn.TabIndex = 3;
