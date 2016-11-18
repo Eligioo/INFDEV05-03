@@ -13,27 +13,14 @@ namespace Assignment_1
 {
     public partial class Form1 : Form
     {
-        SqlConnection connection;
         DatabaseClassesDataContextDataContext db = new DatabaseClassesDataContextDataContext();
+        DBHelper db1 = new DBHelper();
         public Form1()
         {
             InitializeComponent();
-
-            string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" + @"D:\GitHub\INFDEV03-5\Assignment 1\Assignment 1\assignment1.mdf" + @";Integrated Security=True";
-            connection = new SqlConnection(connectionString);
-            try
-            {
-                connection.Open();
-                GetEmployeesListbox();
-                GetProjectsListbox();
-
-                connection.Close();
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.ToString());
-                //MessageBox.Show("Can't connect to database!");
-            }
+            db1.getAllUsers();
+            GetEmployeesListbox();
+            GetProjectsListbox();
         }
 
         private void EditEmployeeBtn_Click(object sender, EventArgs e)
@@ -93,6 +80,11 @@ namespace Assignment_1
         {
             EmployeesListBox.Items.Clear();
             GetEmployeesListbox();
+        }
+
+        private void EmployeesListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

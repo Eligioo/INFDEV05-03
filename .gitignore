@@ -250,3 +250,5 @@ paket-files/
 # JetBrains Rider
 .idea/
 *.sln.iml
+/Assignment 1/Assignment 1/db.rar
+/Assignment 1/Assignment 1/db.zip

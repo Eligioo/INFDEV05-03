@@ -8,9 +8,9 @@ using System.Windows.Forms;
 
 namespace Assignment_1
 {
-    public class Database
+    public class Database<T>
     {
-        string SQLConnect = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" + @"C:\Users\zEz\Source\Repos\INFDEV03-5\Assignment 1\Assignment 1\assignment1.mdf" + @";Integrated Security=True";
+        string SQLConnect = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename='C:\Users\zEz\Source\Repos\INFDEV05-03\Assignment 1\Assignment 1\assignment1.mdf';Integrated Security=True";
         SqlConnection connection;
         SqlDataReader sql_reader;
         SqlCommand sql_command;
@@ -28,15 +28,29 @@ namespace Assignment_1
                 MessageBox.Show("Can't connect to database");
             }
         }
-        public List<object> Select(string query)
+        public List<T> Select(string query)
         {
+            T temp_type;
             sql_command.CommandText = query;
             connection.Open();
             sql_reader = sql_command.ExecuteReader();
             object[] column = new object[sql_reader.FieldCount];
             List<object> result_list = new List<object>();
+            Type myType;
+            IList<PropertyInfo> props = new List<PropertyInfo>(myType.GetProperties());
+
+            foreach (PropertyInfo prop in props)
+            {
+                object propValue = prop.GetValue(myObject, null);
+            }
+
             while (sql_reader.Read())
             {
+                
+
+
+                User u = new User();
+                
                 Dictionary<string, object> temp_list = new Dictionary<string, object>();
                 for (int i = 0; i < sql_reader.GetValues(column); i++)
                 {

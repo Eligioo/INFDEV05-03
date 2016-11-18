@@ -12,6 +12,7 @@ namespace Assignment_1
 {
     public partial class AddEditEmployee : Form
     {
+        DBHelper db1 = new DBHelper();
         DatabaseClassesDataContextDataContext db = new DatabaseClassesDataContextDataContext();
         Assignment_1.employee result;
         public AddEditEmployee(int employeeBsn)
@@ -44,10 +45,8 @@ namespace Assignment_1
 
         private void SaveBtn_Click(object sender, EventArgs e)
         {
-            result.bsn = Int32.Parse(bsn.Text);
-            result.name = name.Text;
-            result.surname = surname.Text;
-            db.SubmitChanges();
+            User u = new Assignment_1.User(null, bsn.Text, name.Text, surname.Text, null);
+            db1.addUser(u);
             this.Close();
             MessageBox.Show("Changes have been made.");
         }
