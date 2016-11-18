@@ -8,10 +8,10 @@ namespace Assignment_1
 {
     class DBHelper
     {
-        Database db;
+        Database<User> db;
         public DBHelper()
         {
-            db = new Database();
+            db = new Database<User>();
         }
 
         public Boolean addUser(User u)
@@ -26,9 +26,9 @@ namespace Assignment_1
             }
         }
 
-        public List<object> getAllUsers() {
+        public List<User> getAllUsers() {
             String query = "SELECT * FROM employee";
-            List < Object >  result = db.Select(query);
+            List < User >  result = db.Select(query);
             //parse to List User
             
             return result;

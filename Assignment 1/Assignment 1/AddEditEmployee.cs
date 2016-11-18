@@ -45,7 +45,7 @@ namespace Assignment_1
 
         private void SaveBtn_Click(object sender, EventArgs e)
         {
-            User u = new Assignment_1.User(null, bsn.Text, name.Text, surname.Text, null);
+            User u = new Assignment_1.User();
             db1.addUser(u);
             this.Close();
             MessageBox.Show("Changes have been made.");

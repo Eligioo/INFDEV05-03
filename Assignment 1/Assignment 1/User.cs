@@ -13,7 +13,7 @@ namespace Assignment_1
         private String bsn;
         private String name;
         private String surname;
-        private String headquarterId;
+        private String headquarter_Id;
 
         public string Id
         {
@@ -67,25 +67,25 @@ namespace Assignment_1
             }
         }
 
-        public string HeadquarterId
+        public string Headquarter_Id
         {
             get
             {
-                return headquarterId;
+                return headquarter_Id;
             }
 
             set
             {
-                headquarterId = value;
+                headquarter_Id = value;
             }
         }
 
-        public User(String id, String bsn, String name, String surname, String headquarterid) {
-            this.Id = id;
-            this.Bsn = bsn;
-            this.Name = name;
-            this.Surname = surname;
-            this.HeadquarterId = headquarterid;
+        public User() {
+            this.Id = Id;
+            this.Bsn = Bsn;
+            this.Name = Name;
+            this.Surname = Surname;
+            this.Headquarter_Id = Headquarter_Id;
         }
 
 

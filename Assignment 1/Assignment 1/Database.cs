@@ -2,15 +2,24 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Assignment_1
 {
-    public class Database<T>
+    public static class TypeCaster
     {
-        string SQLConnect = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename='C:\Users\zEz\Source\Repos\INFDEV05-03\Assignment 1\Assignment 1\assignment1.mdf';Integrated Security=True";
+        public static object To(this string value, Type t)
+        {
+            return Convert.ChangeType(value, t);
+        }
+    }
+
+    public class Database<T> where T : new()
+    {
+        string SQLConnect = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename='C:\Users\zEz\Source\Repos\NewRepo\Assignment 1\Assignment 1\assignment1.mdf';Integrated Security=True";
         SqlConnection connection;
         SqlDataReader sql_reader;
         SqlCommand sql_command;
@@ -28,41 +37,39 @@ namespace Assignment_1
                 MessageBox.Show("Can't connect to database");
             }
         }
+
         public List<T> Select(string query)
         {
-            T temp_type;
             sql_command.CommandText = query;
             connection.Open();
             sql_reader = sql_command.ExecuteReader();
-            object[] column = new object[sql_reader.FieldCount];
-            List<object> result_list = new List<object>();
-            Type myType;
-            IList<PropertyInfo> props = new List<PropertyInfo>(myType.GetProperties());
 
-            foreach (PropertyInfo prop in props)
-            {
-                object propValue = prop.GetValue(myObject, null);
-            }
-
+            var resultList = new List<T>();
             while (sql_reader.Read())
             {
-                
-
-
-                User u = new User();
-                
-                Dictionary<string, object> temp_list = new Dictionary<string, object>();
-                for (int i = 0; i < sql_reader.GetValues(column); i++)
+                var item = new T();
+                Type t = item.GetType();
+                foreach (PropertyInfo property in t.GetProperties())
                 {
-                    temp_list.Add(sql_reader.GetName(i), column[i]);
-                }
-                result_list.Add(temp_list);
-            }
+                    Type type = property.PropertyType;
+                    string readerValue = string.Empty;
 
-            connection.Close();
-             
-            return result_list;
+                    if (sql_reader[property.Name] != DBNull.Value)
+                    {
+                        readerValue = sql_reader[property.Name].ToString();
+                    }
+
+                    if (!string.IsNullOrEmpty(readerValue))
+                    {
+                        property.SetValue(item, readerValue.To(type), null);
+                    }
+
+                }
+                resultList.Add(item);
+            }
+            return resultList;
         }
+
         public void Insert(string query)
         {
             sql_command.CommandText = query;
