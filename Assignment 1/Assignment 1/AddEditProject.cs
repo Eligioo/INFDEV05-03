@@ -14,6 +14,7 @@ namespace Assignment_1
     {
         DBHelper db1 = new DBHelper();
         Assignment_1.Project result;
+        List<Headquarter> hqList = new List<Headquarter>();
         private int projectId;
 
         public AddEditProject(int projectId)
@@ -24,6 +25,7 @@ namespace Assignment_1
             {
                 GetProjectData(projectId);
             }
+            GetHeadquartersData();
         }
 
         public void GetProjectData(int projectId)
@@ -32,6 +34,19 @@ namespace Assignment_1
             projectTextBox.Text = result.Name.Trim();
             budgetTextBox.Text = result.Buget.ToString().Trim();
             allocatedHoursTextBox.Text = result.Allocated_hours.ToString().Trim();
+        }
+
+        public void GetHeadquartersData()
+        {
+            Headquarter hq = new Headquarter();
+            hqList = db1.getHeadquarterList();
+            comboBox1.DataSource = new BindingSource(hqList, null);
+            comboBox1.DisplayMember = "Building_name";
+            comboBox1.ValueMember = "Id";
+            if (this.projectId != 0)
+            {
+                comboBox1.SelectedValue = result.Headquarters_Id;
+            }
         }
 
         private void button2_Click_1(object sender, EventArgs e)
@@ -47,7 +62,7 @@ namespace Assignment_1
             p.Name = projectTextBox.Text;
             p.Buget = float.Parse(budgetTextBox.Text);
             p.Allocated_hours = float.Parse(allocatedHoursTextBox.Text);
-            p.Headquarters_Id = 0;
+            p.Headquarters_Id = Int32.Parse(comboBox1.SelectedValue.ToString());
             if (projectId == 0)
             {
                 if (db1.addProject(p))
@@ -72,6 +87,17 @@ namespace Assignment_1
                     MessageBox.Show("Editing went wrong.");
                 }
             }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            AddEditHeadquarter AddEditHeadquarter = new AddEditHeadquarter(0);
+            AddEditHeadquarter.Show();
+        }
+
+        private void AddEditProject_Activated(object sender, EventArgs e)
+        {
+            GetHeadquartersData();
         }
     }
 }

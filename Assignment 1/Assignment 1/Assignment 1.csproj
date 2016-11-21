@@ -68,6 +68,12 @@
     <Compile Include="AddEditEmployee.Designer.cs">
       <DependentUpon>AddEditEmployee.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddEditHeadquarter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddEditHeadquarter.Designer.cs">
+      <DependentUpon>AddEditHeadquarter.cs</DependentUpon>
+    </Compile>
     <Compile Include="AddEditProject.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -108,6 +114,9 @@
     <None Include="DatabaseClassesDataContext.dbml.layout">
       <DependentUpon>DatabaseClassesDataContext.dbml</DependentUpon>
     </None>
+    <EmbeddedResource Include="AddEditHeadquarter.resx">
+      <DependentUpon>AddEditHeadquarter.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AddEditProject.resx">
       <DependentUpon>AddEditProject.cs</DependentUpon>
     </EmbeddedResource>

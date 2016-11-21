@@ -10,12 +10,12 @@ namespace Assignment_1
     {
         Database<User> user;
         Database<Project> project;
-        Database<Residence> residence;
+        Database<Headquarter> headquarter;
         public DBHelper()
         {
             user = new Database<User>();
             project = new Database<Project>();
-            residence = new Database<Residence>();
+            headquarter = new Database<Headquarter>();
         }
 
         public Boolean addUser(User u)
@@ -102,7 +102,7 @@ namespace Assignment_1
         public Boolean editProject(Project p, int projectId)
         {
             //update hq id not implemented yet
-            String query = "UPDATE project SET name = '"+ p.Name +"', buget = '"+ p.Buget +"', allocated_hours = '"+ p.Allocated_hours +"' WHERE id = '" + projectId+"'";
+            String query = "UPDATE project SET name = '"+ p.Name +"', buget = '"+ p.Buget +"', allocated_hours = '"+ p.Allocated_hours + "', headquarters_id = '"+p.Headquarters_Id+"' WHERE id = '" + projectId+"'";
             try { project.Insert(query); return true; }
             catch (Exception e)
             {
@@ -123,22 +123,23 @@ namespace Assignment_1
             }
         }
 
-        public List<Residence> getSingleUserResidence(int employee_id)
+        public List<Headquarter> getHeadquarterList()
         {
-            String temp_query = "SELECT * FROM employee WHERE bsn = '" + employee_id + "'";
-            List<User> temp_result = user.Select(temp_query);
-
-            String query = "SELECT * FROM employee_residence WHERE employee_id = '" + temp_result[0].Id + "'";
-            List<Residence> result = residence.Select(query);
+            String query = "SELECT * FROM headquarter";
+            List<Headquarter> result = headquarter.Select(query);
             return result;
         }
 
-        public List<Residence> getSingleResidence(int residence_id)
+        public Boolean addHeadquarter(Headquarter h)
         {
-            String query = "SELECT * FROM employee_residence WHERE id =" + residence_id + "'";
-            List<Residence> result = residence.Select(query);
-
-            return result;
+            String query = "INSERT INTO headquarter(building_name, rooms, rent, country, city, street, number, postal_code) VALUES('"+ h.Building_name +"', '"+ h.Rooms +"', '"+ h.Rent +"', '"+ h.Country +"', '"+ h.City +"', '"+ h.Street +"', '"+ h.Number +"', '"+ h.Postal_code +"')";
+            try
+            { headquarter.Insert(query); return true; }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;   
+            }
         }
     }
 }
