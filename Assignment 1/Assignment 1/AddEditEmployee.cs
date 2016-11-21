@@ -1,4 +1,4 @@
-﻿using Assignment_1.Models;
+﻿//using Assignment_1.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,6 +16,8 @@ namespace Assignment_1
         DBHelper db1 = new DBHelper();
         Assignment_1.User result;
         int employeeBsn;
+       
+
         public AddEditEmployee(int employeeBsn)
         {
             this.employeeBsn = employeeBsn;
@@ -27,11 +29,16 @@ namespace Assignment_1
             Headquarter hq = new Headquarter();
             hq.Id = 2;
             hq.Building_name = "Harvard";
-
+            
+            //var residences = db1.getSingleUserResidence(employ)            
             comboBox1.DataSource = new BindingSource(hq, null);
             comboBox1.DisplayMember = "Building_name";
             comboBox1.ValueMember = "Id";
 
+
+
+
+            
             //residenceListbox.DataSource = new BindingSource()
             //comboBox1.Items.Add(hq);
         }
@@ -72,19 +79,6 @@ namespace Assignment_1
             MessageBox.Show("Changes have been made.");
         }
 
-        private void AddBtn_Click(object sender, EventArgs e)
-        {
-            if (residenceListbox.SelectedItems.Count == 1)
-            {
-                string item = residenceListbox.SelectedItem.ToString();
-                string bsn = item.Substring(item.Length - 6);
-                //AddEditEmployee AddEditEmployee = new AddEditEmployee(Int32.Parse(bsn));
-                //AddEditEmployee.Activated += AddEditEmployee_Activated;
-                //AddEditEmployee.Show();
-            }
-            else
-                MessageBox.Show("Select a person.");
-        }
 
         private void SetBtn_Click(object sender, EventArgs e)
         {
@@ -99,6 +93,35 @@ namespace Assignment_1
         private void DeleteBtn_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void AddEditEmployee_Activated(object sender, EventArgs e)
+        {
+            var residences = db1.getSingleUserResidence(employeeBsn);
+            residenceListbox.DataSource = new BindingSource(residences, null);
+            residenceListbox.DisplayMember = "Street";
+            residenceListbox.ValueMember = "Id";
+
+            Headquarter hq = new Headquarter();
+            hq.Id = 2;
+            hq.Building_name = "Harvard";
+
+            //var residences = db1.getSingleUserResidence(employ)            
+            comboBox1.DataSource = new BindingSource(hq, null);
+            comboBox1.DisplayMember = "Building_name";
+            comboBox1.ValueMember = "Id";
+
+
+
+
+            //residenceListbox.DataSource = new BindingSource()
+            //comboBox1.Items.Add(hq);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            AddEditResidence AddEditResidence = new AddEditResidence(this.employeeBsn,int.Parse(residenceListbox.SelectedValue.ToString()));
+            AddEditResidence.Show();
         }
     }
 }

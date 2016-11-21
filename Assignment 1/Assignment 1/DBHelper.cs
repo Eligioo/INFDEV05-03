@@ -10,10 +10,12 @@ namespace Assignment_1
     {
         Database<User> user;
         Database<Project> project;
+        Database<Residence> residence;
         public DBHelper()
         {
             user = new Database<User>();
             project = new Database<Project>();
+            residence = new Database<Residence>();
         }
 
         public Boolean addUser(User u)
@@ -119,6 +121,24 @@ namespace Assignment_1
                 Console.WriteLine(e.Message);
                 return false;
             }
+        }
+
+        public List<Residence> getSingleUserResidence(int employee_id)
+        {
+            String temp_query = "SELECT * FROM employee WHERE bsn = '" + employee_id + "'";
+            List<User> temp_result = user.Select(temp_query);
+
+            String query = "SELECT * FROM employee_residence WHERE employee_id = '" + temp_result[0].Id + "'";
+            List<Residence> result = residence.Select(query);
+            return result;
+        }
+
+        public List<Residence> getSingleResidence(int residence_id)
+        {
+            String query = "SELECT * FROM employee_residence WHERE id =" + residence_id + "'";
+            List<Residence> result = residence.Select(query);
+
+            return result;
         }
     }
 }

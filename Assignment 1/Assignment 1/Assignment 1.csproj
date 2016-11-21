@@ -74,6 +74,12 @@
     <Compile Include="AddEditProject.Designer.cs">
       <DependentUpon>AddEditProject.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddEditResidence.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddEditResidence.Designer.cs">
+      <DependentUpon>AddEditResidence.cs</DependentUpon>
+    </Compile>
     <Compile Include="Database.cs" />
     <Compile Include="DatabaseClassesDataContext.cs">
       <DependentUpon>DatabaseClassesDataContext.dbml</DependentUpon>
@@ -92,6 +98,7 @@
     </Compile>
     <Compile Include="Models\Headquarter.cs" />
     <Compile Include="Models\Project.cs" />
+    <Compile Include="Models\Residence.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\User.cs" />
@@ -103,6 +110,9 @@
     </None>
     <EmbeddedResource Include="AddEditProject.resx">
       <DependentUpon>AddEditProject.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddEditResidence.resx">
+      <DependentUpon>AddEditResidence.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

@@ -127,6 +127,7 @@
             this.button1.TabIndex = 9;
             this.button1.Text = "Add";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
@@ -175,6 +176,7 @@
             this.Controls.Add(this.name);
             this.Name = "AddEditEmployee";
             this.Text = "AddEditEmployee";
+            this.Activated += new System.EventHandler(this.AddEditEmployee_Activated);
             this.ResumeLayout(false);
             this.PerformLayout();
 
