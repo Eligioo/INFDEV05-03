@@ -15,6 +15,7 @@ namespace Assignment_1
         DBHelper db1 = new DBHelper();
         Assignment_1.User result;
         int employeeBsn;
+        int employee_id;
         public AddEditEmployee(int employeeBsn)
         {
             this.employeeBsn = employeeBsn;
@@ -41,6 +42,7 @@ namespace Assignment_1
             name.Text = result.Name.TrimEnd();
             surname.Text = result.Surname.TrimEnd();
             bsn.Text = result.Bsn.ToString().TrimEnd();
+            this.employee_id = int.Parse(result.Id);
         }
 
         private void CancelBtn_Click(object sender, EventArgs e)
@@ -71,33 +73,57 @@ namespace Assignment_1
             MessageBox.Show("Changes have been made.");
         }
 
-        private void AddBtn_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
+        {
+            AddEditResidence AddEditResidence = new AddEditResidence(employee_id, 0);
+            AddEditResidence.Show();
+        }
+
+        private void AddEditEmployee_Activated(object sender, EventArgs e)
+        {
+            residenceListbox.DataSource = new BindingSource(db1.getSingleUserResidence(employee_id), null);
+            residenceListbox.DisplayMember = "Street";
+            residenceListbox.ValueMember = "Id";
+        }
+
+        private void button2_Click(object sender, EventArgs e)
         {
             if (residenceListbox.SelectedItems.Count == 1)
             {
-                string item = residenceListbox.SelectedItem.ToString();
-                string bsn = item.Substring(item.Length - 6);
-                //AddEditEmployee AddEditEmployee = new AddEditEmployee(Int32.Parse(bsn));
-                //AddEditEmployee.Activated += AddEditEmployee_Activated;
-                //AddEditEmployee.Show();
+                int residence_id = int.Parse(residenceListbox.SelectedValue.ToString());
+                var residences = db1.getSingleUserResidence(employee_id);
+                foreach (var residence in residences)
+                {
+                    if (int.Parse(residenceListbox.SelectedValue.ToString()) != residence.Id)
+                    {
+                        residence.Current_residence = "False";
+                    }
+                    else
+                    {
+                        residence.Current_residence = "True";
+                    }
+                    db1.editResidence(residence, residence.Id);
+                }
             }
             else
-                MessageBox.Show("Select a person.");
+                MessageBox.Show("Select a residence.");
         }
 
-        private void SetBtn_Click(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e)
         {
-
+            if (residenceListbox.SelectedItems.Count == 1)
+            {
+                int residence_id = int.Parse(residenceListbox.SelectedValue.ToString());
+                AddEditResidence AddEditResidence = new AddEditResidence(employee_id, residence_id);
+                AddEditResidence.Show();
+            }
+            else
+                MessageBox.Show("Select a residence.");
         }
 
-        private void EditBtn_Click(object sender, EventArgs e)
+        private void button4_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void DeleteBtn_Click(object sender, EventArgs e)
-        {
-
+            db1.deleteResidence(int.Parse(residenceListbox.SelectedValue.ToString()));
         }
     }
 }

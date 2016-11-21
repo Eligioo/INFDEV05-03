@@ -38,6 +38,8 @@
             this.textBox_postalcode = new System.Windows.Forms.TextBox();
             this.textBox_street = new System.Windows.Forms.TextBox();
             this.textBox_housenr = new System.Windows.Forms.TextBox();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.cancelBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // Country
@@ -120,11 +122,33 @@
             this.textBox_housenr.Size = new System.Drawing.Size(100, 20);
             this.textBox_housenr.TabIndex = 9;
             // 
+            // btnSave
+            // 
+            this.btnSave.Location = new System.Drawing.Point(11, 377);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(75, 23);
+            this.btnSave.TabIndex = 10;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // cancelBtn
+            // 
+            this.cancelBtn.Location = new System.Drawing.Point(393, 377);
+            this.cancelBtn.Name = "cancelBtn";
+            this.cancelBtn.Size = new System.Drawing.Size(75, 23);
+            this.cancelBtn.TabIndex = 11;
+            this.cancelBtn.Text = "Cancel";
+            this.cancelBtn.UseVisualStyleBackColor = true;
+            this.cancelBtn.Click += new System.EventHandler(this.cancelBtn_Click);
+            // 
             // AddEditResidence
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(480, 412);
+            this.Controls.Add(this.cancelBtn);
+            this.Controls.Add(this.btnSave);
             this.Controls.Add(this.textBox_housenr);
             this.Controls.Add(this.textBox_street);
             this.Controls.Add(this.textBox_postalcode);
@@ -154,5 +178,7 @@
         private System.Windows.Forms.TextBox textBox_postalcode;
         private System.Windows.Forms.TextBox textBox_street;
         private System.Windows.Forms.TextBox textBox_housenr;
+        private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Button cancelBtn;
     }
 }
