@@ -88,5 +88,16 @@ namespace Assignment_1
                 }
             }
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            AddEditHeadquarter AddEditHeadquarter = new AddEditHeadquarter(0);
+            AddEditHeadquarter.Show();
+        }
+
+        private void AddEditProject_Activated(object sender, EventArgs e)
+        {
+            GetHeadquartersData();
+        }
     }
 }
