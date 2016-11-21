@@ -10,11 +10,12 @@ namespace Assignment_1
     {
         Database<User> user;
         Database<Project> project;
-        Database<Models.Headquarter> headquarter;
+        Database<Headquarter> headquarter;
         public DBHelper()
         {
             user = new Database<User>();
             project = new Database<Project>();
+            headquarter = new Database<Headquarter>();
         }
 
         public Boolean addUser(User u)
@@ -101,7 +102,7 @@ namespace Assignment_1
         public Boolean editProject(Project p, int projectId)
         {
             //update hq id not implemented yet
-            String query = "UPDATE project SET name = '"+ p.Name +"', buget = '"+ p.Buget +"', allocated_hours = '"+ p.Allocated_hours +"' WHERE id = '" + projectId+"'";
+            String query = "UPDATE project SET name = '"+ p.Name +"', buget = '"+ p.Buget +"', allocated_hours = '"+ p.Allocated_hours + "', headquarters_id = '"+p.Headquarters_Id+"' WHERE id = '" + projectId+"'";
             try { project.Insert(query); return true; }
             catch (Exception e)
             {
@@ -122,10 +123,11 @@ namespace Assignment_1
             }
         }
 
-        public List<Models.Headquarter> getHeadquarterList()
+        public List<Headquarter> getHeadquarterList()
         {
             String query = "SELECT * FROM headquarter";
-            return new List<Models.Headquarter>();
+            List<Headquarter> result = headquarter.Select(query);
+            return result;
         }
     }
 }
