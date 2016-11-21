@@ -129,5 +129,17 @@ namespace Assignment_1
             List<Headquarter> result = headquarter.Select(query);
             return result;
         }
+
+        public Boolean addHeadquarter(Headquarter h)
+        {
+            String query = "INSERT INTO headquarter(building_name, rooms, rent, country, city, street, number, postal_code) VALUES('"+ h.Building_name +"', '"+ h.Rooms +"', '"+ h.Rent +"', '"+ h.Country +"', '"+ h.City +"', '"+ h.Street +"', '"+ h.Number +"', '"+ h.Postal_code +"')";
+            try
+            { headquarter.Insert(query); return true; }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;   
+            }
+        }
     }
 }
