@@ -61,5 +61,10 @@ namespace Assignment_1
         {
             this.Close();
         }
+
+        private void AddEditResidence_Activated(object sender, EventArgs e)
+        {
+            GetResidenceData();
+        }
     }
 }

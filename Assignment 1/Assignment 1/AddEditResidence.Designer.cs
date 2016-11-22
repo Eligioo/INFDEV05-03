@@ -161,6 +161,7 @@
             this.Controls.Add(this.Country);
             this.Name = "AddEditResidence";
             this.Text = "AddEditResidence";
+            this.Activated += new System.EventHandler(this.AddEditResidence_Activated);
             this.ResumeLayout(false);
             this.PerformLayout();
 

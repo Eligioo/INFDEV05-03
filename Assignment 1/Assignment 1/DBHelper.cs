@@ -12,12 +12,16 @@ namespace Assignment_1
         Database<Project> project;
         Database<Headquarter> headquarter;
         Database<Residence> residence;
+        Database<Degree> degree;
+        Database<Degree_employee> degree_employee;
         public DBHelper()
         {
             user = new Database<User>();
             project = new Database<Project>();
             headquarter = new Database<Headquarter>();
             residence = new Database<Residence>();
+            degree = new Database<Degree>();
+            degree_employee = new Database<Degree_employee>();
         }
 
         public Boolean addUser(User u)
@@ -193,6 +197,64 @@ namespace Assignment_1
                 Console.WriteLine(e.Message);
                 return false;
             }
+        }
+
+        public List<Degree> getSingleUserDegree(int employee_id)
+        {
+            String query = "SELECT * FROM degree AS d, degree_employee AS de WHERE de.employee_id = '" + employee_id + "' AND d.id = de.degree_id";
+            List<Degree> result = degree.Select(query);
+            return result;
+        }
+
+        public Boolean addDegree(Degree d, int employee_id)
+        {
+            String query = "INSERT INTO degree(course, school, level) VALUES('" + d.course + "', '" + d.school + "', '" + d.level + "')";
+            String query_select = "SELECT * FROM degree WHERE course = '" + d.course + "' AND school = '" + d.school + "' AND level = '" + d.level + "'";
+            try
+            {
+                degree.Insert(query);
+                List<Degree> result = degree.Select(query_select);
+                var degree_id = result[0].id;
+                String query_connectTable = "INSERT INTO degree_employee(employee_id, degree_id) VALUES('" + employee_id + "', '" + degree_id + "')";
+                degree_employee.Insert(query_connectTable);
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
+            }
+        }
+
+        public Boolean editDegree(Degree d, int degree_id)
+        {
+            //update hq id not implemented yet
+            String query = "UPDATE degree SET course = '" + d.course + "', school = '" + d.school + "', level = '" + d.level + "' WHERE id = '" + degree_id + "'";
+            try { degree.Insert(query); return true; }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
+            }
+        }
+
+        public Boolean deleteDegree(int degree_id)
+        {
+            String query = "DELETE FROM degree WHERE id = '" + degree_id + "'";
+            try { degree.Delete(query); return true; }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
+            }
+        }
+
+        public List<Degree> getSingleDegree(int degree_id)
+        {
+            String query = "SELECT * FROM degree WHERE id = '" + degree_id + "'";
+            List<Degree> result = degree.Select(query);
+
+            return result;
         }
     }
 }

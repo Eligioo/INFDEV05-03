@@ -37,10 +37,15 @@
             this.residenceListbox = new System.Windows.Forms.ListBox();
             this.SaveBtn = new System.Windows.Forms.Button();
             this.CancelBtn = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.addResidenceButton = new System.Windows.Forms.Button();
+            this.setCurrentResidenceButton = new System.Windows.Forms.Button();
+            this.editResidenceButton = new System.Windows.Forms.Button();
+            this.deleteResidenceButton = new System.Windows.Forms.Button();
+            this.degreeListBox = new System.Windows.Forms.ListBox();
+            this.label_Degree = new System.Windows.Forms.Label();
+            this.addDegreeButton = new System.Windows.Forms.Button();
+            this.editDegreeButton = new System.Windows.Forms.Button();
+            this.deleteDegreeButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // name
@@ -119,55 +124,107 @@
             this.CancelBtn.UseVisualStyleBackColor = true;
             this.CancelBtn.Click += new System.EventHandler(this.CancelBtn_Click);
             // 
-            // button1
+            // addResidenceButton
             // 
-            this.button1.Location = new System.Drawing.Point(219, 182);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 9;
-            this.button1.Text = "Add";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.addResidenceButton.Location = new System.Drawing.Point(219, 182);
+            this.addResidenceButton.Name = "addResidenceButton";
+            this.addResidenceButton.Size = new System.Drawing.Size(75, 23);
+            this.addResidenceButton.TabIndex = 9;
+            this.addResidenceButton.Text = "Add";
+            this.addResidenceButton.UseVisualStyleBackColor = true;
+            this.addResidenceButton.Click += new System.EventHandler(this.button1_Click);
             // 
-            // button2
+            // setCurrentResidenceButton
             // 
-            this.button2.Location = new System.Drawing.Point(219, 211);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 10;
-            this.button2.Text = "Set";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.setCurrentResidenceButton.Location = new System.Drawing.Point(219, 211);
+            this.setCurrentResidenceButton.Name = "setCurrentResidenceButton";
+            this.setCurrentResidenceButton.Size = new System.Drawing.Size(75, 23);
+            this.setCurrentResidenceButton.TabIndex = 10;
+            this.setCurrentResidenceButton.Text = "Set";
+            this.setCurrentResidenceButton.UseVisualStyleBackColor = true;
+            this.setCurrentResidenceButton.Click += new System.EventHandler(this.button2_Click);
             // 
-            // button3
+            // editResidenceButton
             // 
-            this.button3.Location = new System.Drawing.Point(219, 240);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 11;
-            this.button3.Text = "Edit";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.editResidenceButton.Location = new System.Drawing.Point(219, 240);
+            this.editResidenceButton.Name = "editResidenceButton";
+            this.editResidenceButton.Size = new System.Drawing.Size(75, 23);
+            this.editResidenceButton.TabIndex = 11;
+            this.editResidenceButton.Text = "Edit";
+            this.editResidenceButton.UseVisualStyleBackColor = true;
+            this.editResidenceButton.Click += new System.EventHandler(this.button3_Click);
             // 
-            // button4
+            // deleteResidenceButton
             // 
-            this.button4.Location = new System.Drawing.Point(219, 269);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 12;
-            this.button4.Text = "Delete";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.deleteResidenceButton.Location = new System.Drawing.Point(219, 269);
+            this.deleteResidenceButton.Name = "deleteResidenceButton";
+            this.deleteResidenceButton.Size = new System.Drawing.Size(75, 23);
+            this.deleteResidenceButton.TabIndex = 12;
+            this.deleteResidenceButton.Text = "Delete";
+            this.deleteResidenceButton.UseVisualStyleBackColor = true;
+            this.deleteResidenceButton.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // degreeListBox
+            // 
+            this.degreeListBox.FormattingEnabled = true;
+            this.degreeListBox.Location = new System.Drawing.Point(338, 41);
+            this.degreeListBox.Name = "degreeListBox";
+            this.degreeListBox.Size = new System.Drawing.Size(237, 95);
+            this.degreeListBox.TabIndex = 13;
+            // 
+            // label_Degree
+            // 
+            this.label_Degree.AutoSize = true;
+            this.label_Degree.Location = new System.Drawing.Point(335, 25);
+            this.label_Degree.Name = "label_Degree";
+            this.label_Degree.Size = new System.Drawing.Size(47, 13);
+            this.label_Degree.TabIndex = 14;
+            this.label_Degree.Text = "Degrees";
+            // 
+            // addDegreeButton
+            // 
+            this.addDegreeButton.Location = new System.Drawing.Point(581, 41);
+            this.addDegreeButton.Name = "addDegreeButton";
+            this.addDegreeButton.Size = new System.Drawing.Size(75, 23);
+            this.addDegreeButton.TabIndex = 15;
+            this.addDegreeButton.Text = "Add";
+            this.addDegreeButton.UseVisualStyleBackColor = true;
+            this.addDegreeButton.Click += new System.EventHandler(this.addDegreeButton_Click);
+            // 
+            // editDegreeButton
+            // 
+            this.editDegreeButton.Location = new System.Drawing.Point(581, 70);
+            this.editDegreeButton.Name = "editDegreeButton";
+            this.editDegreeButton.Size = new System.Drawing.Size(75, 23);
+            this.editDegreeButton.TabIndex = 16;
+            this.editDegreeButton.Text = "Edit";
+            this.editDegreeButton.UseVisualStyleBackColor = true;
+            this.editDegreeButton.Click += new System.EventHandler(this.editDegreeButton_Click);
+            // 
+            // deleteDegreeButton
+            // 
+            this.deleteDegreeButton.Location = new System.Drawing.Point(581, 99);
+            this.deleteDegreeButton.Name = "deleteDegreeButton";
+            this.deleteDegreeButton.Size = new System.Drawing.Size(75, 23);
+            this.deleteDegreeButton.TabIndex = 17;
+            this.deleteDegreeButton.Text = "Delete";
+            this.deleteDegreeButton.UseVisualStyleBackColor = true;
+            this.deleteDegreeButton.Click += new System.EventHandler(this.deleteDegreeButton_Click);
             // 
             // AddEditEmployee
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(714, 372);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.deleteDegreeButton);
+            this.Controls.Add(this.editDegreeButton);
+            this.Controls.Add(this.addDegreeButton);
+            this.Controls.Add(this.label_Degree);
+            this.Controls.Add(this.degreeListBox);
+            this.Controls.Add(this.deleteResidenceButton);
+            this.Controls.Add(this.editResidenceButton);
+            this.Controls.Add(this.setCurrentResidenceButton);
+            this.Controls.Add(this.addResidenceButton);
             this.Controls.Add(this.CancelBtn);
             this.Controls.Add(this.SaveBtn);
             this.Controls.Add(this.residenceListbox);
@@ -196,9 +253,14 @@
         private System.Windows.Forms.ListBox residenceListbox;
         private System.Windows.Forms.Button SaveBtn;
         private System.Windows.Forms.Button CancelBtn;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button addResidenceButton;
+        private System.Windows.Forms.Button setCurrentResidenceButton;
+        private System.Windows.Forms.Button editResidenceButton;
+        private System.Windows.Forms.Button deleteResidenceButton;
+        private System.Windows.Forms.ListBox degreeListBox;
+        private System.Windows.Forms.Label label_Degree;
+        private System.Windows.Forms.Button addDegreeButton;
+        private System.Windows.Forms.Button editDegreeButton;
+        private System.Windows.Forms.Button deleteDegreeButton;
     }
 }

@@ -31,6 +31,10 @@ namespace Assignment_1
             comboBox1.DataSource = new BindingSource(hq, null);
             comboBox1.DisplayMember = "Building_name";
             comboBox1.ValueMember = "Id";
+            degreeListBox.DataSource = new BindingSource(db1.getSingleUserDegree(employee_id), null);
+            degreeListBox.DisplayMember = "course";
+            degreeListBox.ValueMember = "id";
+            
 
             //residenceListbox.DataSource = new BindingSource()
             //comboBox1.Items.Add(hq);
@@ -84,6 +88,9 @@ namespace Assignment_1
             residenceListbox.DataSource = new BindingSource(db1.getSingleUserResidence(employee_id), null);
             residenceListbox.DisplayMember = "Street";
             residenceListbox.ValueMember = "Id";
+            degreeListBox.DataSource = new BindingSource(db1.getSingleUserDegree(employee_id), null);
+            degreeListBox.DisplayMember = "course";
+            degreeListBox.ValueMember = "id";
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -123,7 +130,46 @@ namespace Assignment_1
 
         private void button4_Click(object sender, EventArgs e)
         {
-            db1.deleteResidence(int.Parse(residenceListbox.SelectedValue.ToString()));
+            if (residenceListbox.SelectedItems.Count == 1)
+            {
+                db1.deleteResidence(int.Parse(residenceListbox.SelectedValue.ToString()));
+            }
+            else
+            {
+                MessageBox.Show("Select a residence.");
+            }
+        }
+
+        private void addDegreeButton_Click(object sender, EventArgs e)
+        {
+            AddEditDegree AddEditDegree = new AddEditDegree(employee_id, 0);
+            AddEditDegree.Show();
+        }
+
+        private void editDegreeButton_Click(object sender, EventArgs e)
+        {
+            if (degreeListBox.SelectedItems.Count == 1)
+            {
+                AddEditDegree AddEditDegree = new AddEditDegree(employee_id, int.Parse(degreeListBox.SelectedValue.ToString()));
+                AddEditDegree.Show();
+            }
+            else
+            {
+                MessageBox.Show("Select a degree");
+            }
+        }
+
+        private void deleteDegreeButton_Click(object sender, EventArgs e)
+        {
+            var degree_id = int.Parse(degreeListBox.SelectedValue.ToString());
+            if (db1.deleteDegree(degree_id))
+            {
+                MessageBox.Show("Degree has been deleted");
+            }
+            else
+            {
+                MessageBox.Show("Something went wrong");
+            }
         }
     }
 }
