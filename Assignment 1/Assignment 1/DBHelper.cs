@@ -14,6 +14,7 @@ namespace Assignment_1
         Database<Residence> residence;
         Database<Degree> degree;
         Database<Degree_employee> degree_employee;
+        Database<Position> employee_position;
         public DBHelper()
         {
             user = new Database<User>();
@@ -22,6 +23,7 @@ namespace Assignment_1
             residence = new Database<Residence>();
             degree = new Database<Degree>();
             degree_employee = new Database<Degree_employee>();
+            employee_position = new Database<Position>();
         }
 
         public Boolean addUser(User u)
@@ -253,6 +255,68 @@ namespace Assignment_1
         {
             String query = "SELECT * FROM degree WHERE id = '" + degree_id + "'";
             List<Degree> result = degree.Select(query);
+
+            return result;
+        }
+
+        public List<Position> getAllPositions()
+        {
+            String query = "SELECT * FROM employee_position WHERE project_id = '0'";
+            List<Position> result = employee_position.Select(query);
+
+            return result;
+        }
+
+        public List<Position> getSinglePosition(int position_id)
+        {
+            String query = "SELECT * FROM employee_position WHERE id = '" + position_id + "'";
+            List<Position> result = employee_position.Select(query);
+
+            return result;
+        }
+
+        public Boolean addPosition(Position p)
+        {
+            String query = "INSERT INTO employee_position(name, description, hour_fee, employee_id, project_id) VALUES('" + p.Name + "', '" + p.Description + "', '" + p.Hour_fee + "', '" + 0 + "', '" + 0 + "')";
+            try
+            {
+                employee_position.Insert(query);
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
+            }
+        }
+
+        public Boolean editPosition(Position p, int position_id)
+        {
+            //update hq id not implemented yet
+            String query = "UPDATE employee_position SET name = '" + p.Name + "', description = '" + p.Description + "', hour_fee = '" + p.Hour_fee + "' WHERE id = '" + position_id + "'";
+            try { employee_position.Insert(query); return true; }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
+            }
+        }
+
+        public Boolean deletePosition(int position_id)
+        {
+            String query = "DELETE FROM employee_position WHERE id = '" + position_id + "'";
+            try { employee_position.Delete(query); return true; }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
+            }
+        }
+
+        public List<Position> getSingleProjectPositions(int project_id)
+        {
+            String query = "SELECT * FROM employee_position WHERE project_id = '" + project_id + "'";
+            List<Position> result = employee_position.Select(query);
 
             return result;
         }

@@ -21,6 +21,7 @@ namespace Assignment_1
             //db1.getAllUsers();
             GetEmployeesListbox();
             GetProjectsListbox();
+            GetPositionsListbox();
             db1.getAllProjects();
         }
 
@@ -67,6 +68,14 @@ namespace Assignment_1
             }
         }
 
+        private void GetPositionsListbox()
+        {
+            var positions = db1.getAllPositions();
+            PositionsListBox.DataSource = new BindingSource(positions, null);
+            PositionsListBox.DisplayMember = "name";
+            PositionsListBox.ValueMember = "id";
+        }
+
         private void Form1_Activated(object sender, EventArgs e)
         {
             EmployeesListBox.Items.Clear();
@@ -74,6 +83,8 @@ namespace Assignment_1
 
             ProjectsListBox.Items.Clear();
             GetProjectsListbox();
+
+            GetPositionsListbox();
         }
 
         private void EmployeesListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -131,6 +142,40 @@ namespace Assignment_1
             }
             else
                 MessageBox.Show("Select a project.");
+        }
+
+        private void positionAddButton_Click(object sender, EventArgs e)
+        {
+            AddEditPosition AddEditPosition = new AddEditPosition(0);
+            AddEditPosition.Show();
+        }
+
+        private void positionEditButton_Click(object sender, EventArgs e)
+        {
+            if (PositionsListBox.SelectedItems.Count == 1)
+            {
+                int position_id = int.Parse(PositionsListBox.SelectedValue.ToString());
+                AddEditPosition AddEditPosition = new AddEditPosition(position_id);
+                AddEditPosition.Show();
+            }
+            else
+                MessageBox.Show("Select a position");
+        }
+
+        private void positionDeleteButton_Click(object sender, EventArgs e)
+        {
+            if (PositionsListBox.SelectedItems.Count == 1)
+            {
+                int position_id = int.Parse(PositionsListBox.SelectedValue.ToString());
+                if (db1.deletePosition(position_id))
+                {
+                    MessageBox.Show("Position deleted.");
+                }
+                else
+                    MessageBox.Show("Something went wrong!");
+            }
+            else
+                MessageBox.Show("Select a position.");
         }
     }
 }

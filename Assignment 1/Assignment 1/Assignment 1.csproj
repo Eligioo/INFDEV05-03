@@ -74,11 +74,23 @@
     <Compile Include="AddEditEmployee.Designer.cs">
       <DependentUpon>AddEditEmployee.cs</DependentUpon>
     </Compile>
+    <Compile Include="AddEditEmployee_Position.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddEditEmployee_Position.Designer.cs">
+      <DependentUpon>AddEditEmployee_Position.cs</DependentUpon>
+    </Compile>
     <Compile Include="AddEditHeadquarter.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="AddEditHeadquarter.Designer.cs">
       <DependentUpon>AddEditHeadquarter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AddEditPosition.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddEditPosition.Designer.cs">
+      <DependentUpon>AddEditPosition.cs</DependentUpon>
     </Compile>
     <Compile Include="AddEditProject.cs">
       <SubType>Form</SubType>
@@ -111,6 +123,7 @@
     <Compile Include="Models\Degree.cs" />
     <Compile Include="Models\Degree_employee.cs" />
     <Compile Include="Models\Headquarter.cs" />
+    <Compile Include="Models\Position.cs" />
     <Compile Include="Models\Project.cs" />
     <Compile Include="Models\Residence.cs" />
     <Compile Include="Program.cs" />
@@ -125,8 +138,14 @@
     <None Include="DatabaseClassesDataContext.dbml.layout">
       <DependentUpon>DatabaseClassesDataContext.dbml</DependentUpon>
     </None>
+    <EmbeddedResource Include="AddEditEmployee_Position.resx">
+      <DependentUpon>AddEditEmployee_Position.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AddEditHeadquarter.resx">
       <DependentUpon>AddEditHeadquarter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AddEditPosition.resx">
+      <DependentUpon>AddEditPosition.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AddEditProject.resx">
       <DependentUpon>AddEditProject.cs</DependentUpon>

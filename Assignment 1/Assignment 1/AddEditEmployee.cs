@@ -85,12 +85,26 @@ namespace Assignment_1
 
         private void AddEditEmployee_Activated(object sender, EventArgs e)
         {
-            residenceListbox.DataSource = new BindingSource(db1.getSingleUserResidence(employee_id), null);
+            var residences = db1.getSingleUserResidence(employee_id);
+            var current_residence = new Residence();
+            residenceListbox.DataSource = new BindingSource(residences, null);
             residenceListbox.DisplayMember = "Street";
             residenceListbox.ValueMember = "Id";
             degreeListBox.DataSource = new BindingSource(db1.getSingleUserDegree(employee_id), null);
             degreeListBox.DisplayMember = "course";
             degreeListBox.ValueMember = "id";
+            foreach (var residence in residences)
+            {
+                if (residence.Current_residence == "True")
+                {
+                    current_residence = residence;
+                }
+            }
+
+            if (employeeBsn != 0)
+            {
+                residenceListbox.SelectedItem = current_residence;
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)

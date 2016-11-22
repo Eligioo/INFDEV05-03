@@ -26,6 +26,7 @@ namespace Assignment_1
                 GetProjectData(projectId);
             }
             GetHeadquartersData();
+            GetPositionsData();
         }
 
         public void GetProjectData(int projectId)
@@ -46,6 +47,17 @@ namespace Assignment_1
             if (this.projectId != 0)
             {
                 comboBox1.SelectedValue = result.Headquarters_Id;
+            }
+        }
+
+        private void GetPositionsData()
+        {
+            if (projectId != 0)
+            {
+                var result = db1.getSingleProjectPositions(this.projectId);
+                listBox_positions.DataSource = new BindingSource(result, null);
+                listBox_positions.DisplayMember = "Name";
+                listBox_positions.ValueMember = "Id";
             }
         }
 
@@ -98,6 +110,23 @@ namespace Assignment_1
         private void AddEditProject_Activated(object sender, EventArgs e)
         {
             GetHeadquartersData();
+            GetPositionsData();
+        }
+
+        private void AddPositionButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void editPositionButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void deletePositionButton_Click(object sender, EventArgs e)
+        {
+            db1.deletePosition(int.Parse(listBox_positions.SelectedValue.ToString()));
+            MessageBox.Show("The position has been deleted");
         }
     }
 }
