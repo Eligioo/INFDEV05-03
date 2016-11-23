@@ -64,7 +64,10 @@ namespace Assignment_1
 
         private void AddEditResidence_Activated(object sender, EventArgs e)
         {
-            GetResidenceData();
+            if (residence_id != 0)
+            {
+                GetResidenceData();
+            }
         }
     }
 }

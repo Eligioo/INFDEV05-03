@@ -181,7 +181,7 @@ namespace Assignment_1
         {
             //update hq id not implemented yet
             String query = "UPDATE employee_residence SET country = '" + r.Country + "', city = '" + r.City + "', street = '" + r.Street + "', number = '" + r.Number + "', postal_code = '" + r.Postal_code + "', current_residence = '" + r.Current_residence+ "' WHERE id = '" + residence_id + "'";
-            try { residence.Insert(query); return true; }
+            try { residence.Update(query); return true; }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
@@ -232,7 +232,7 @@ namespace Assignment_1
         {
             //update hq id not implemented yet
             String query = "UPDATE degree SET course = '" + d.course + "', school = '" + d.school + "', level = '" + d.level + "' WHERE id = '" + degree_id + "'";
-            try { degree.Insert(query); return true; }
+            try { degree.Update(query); return true; }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);

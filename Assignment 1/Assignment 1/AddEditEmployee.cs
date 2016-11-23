@@ -152,6 +152,7 @@ namespace Assignment_1
             {
                 MessageBox.Show("Select a residence.");
             }
+            AddEditEmployee_Activated(sender, e);
         }
 
         private void addDegreeButton_Click(object sender, EventArgs e)
