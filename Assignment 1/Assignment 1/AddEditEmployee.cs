@@ -63,7 +63,7 @@ namespace Assignment_1
             u.Id = 0;
             if (comboBox1.SelectedValue != null)
             {
-                u.Headquarter_Id = Int32.Parse(comboBox1.SelectedValue);
+                u.Headquarter_Id = Int32.Parse(comboBox1.SelectedValue.ToString());
             }
             if (employeeBsn == 0)
             {

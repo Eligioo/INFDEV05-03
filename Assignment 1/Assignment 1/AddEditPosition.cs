@@ -41,7 +41,7 @@ namespace Assignment_1
             position.Hour_fee = int.Parse(textBox_hourfee.Text);
             if (position_id == 0)
             {
-                db.addPosition(position);
+                db.addPosition(position, 0);
             }
             else
             {

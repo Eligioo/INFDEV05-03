@@ -95,14 +95,14 @@ namespace Assignment_1
 
         }
 
-        public Boolean addProject(Project p)
+        public int addProject(Project p)
         {
             String query = "INSERT INTO project(name, buget, allocated_hours, headquarters_id) VALUES('"+ p.Name +"', '"+ p.Buget +"', '"+ p.Allocated_hours +"', '"+ p.Headquarters_Id +"')";
-            try { project.Insert(query); return true; }
+            try { var insertId = project.Insert(query); return insertId; }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                return false;
+                return -1;
 
             }
         }
@@ -111,7 +111,7 @@ namespace Assignment_1
         {
             //update hq id not implemented yet
             String query = "UPDATE project SET name = '"+ p.Name +"', buget = '"+ p.Buget +"', allocated_hours = '"+ p.Allocated_hours + "', headquarters_id = '"+p.Headquarters_Id+"' WHERE id = '" + projectId+"'";
-            try { project.Insert(query); return true; }
+            try { project.Update(query); return true; }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
@@ -261,7 +261,7 @@ namespace Assignment_1
 
         public List<Position> getAllPositions()
         {
-            String query = "SELECT DISTINCT name, description, hour_fee FROM employee_position WHERE project_id = '0'";
+            String query = "SELECT DISTINCT p.id, name, description, hour_fee FROM position AS p, employee_project_position AS pe WHERE p.id = pe.position_id AND pe.project_id = '0'";
             List<Position> result = employee_position.Select(query);
 
             return result;
@@ -269,18 +269,20 @@ namespace Assignment_1
 
         public List<Position> getSinglePosition(int position_id)
         {
-            String query = "SELECT * FROM employee_position WHERE id = '" + position_id + "'";
+            String query = "SELECT * FROM position WHERE id = '" + position_id + "'";
             List<Position> result = employee_position.Select(query);
 
             return result;
         }
 
-        public Boolean addPosition(Position p)
+        public Boolean addPosition(Position p, int project_id)
         {
-            String query = "INSERT INTO employee_position(name, description, hour_fee, employee_id, project_id) VALUES('" + p.Name + "', '" + p.Description + "', '" + p.Hour_fee + "', '" + p.Employee_id + "', '" + p.Project_id + "')";
+            String query = "INSERT INTO position(name, description, hour_fee) VALUES('" + p.Name + "', '" + p.Description + "', '" + p.Hour_fee + "')";
             try
             {
-                employee_position.Insert(query);
+                var insertid = (int)employee_position.Insert(query);
+                String query_2 = "INSERT INTO employee_project_position(position_id, project_id, employee_id) VALUES('" + insertid + "', '" + project_id + "', '0')";
+                employee_position.Insert(query_2);
                 return true;
             }
             catch (Exception e)
@@ -293,7 +295,7 @@ namespace Assignment_1
         public Boolean editPosition(Position p, int position_id)
         {
             //update hq id not implemented yet
-            String query = "UPDATE employee_position SET name = '" + p.Name + "', description = '" + p.Description + "', hour_fee = '" + p.Hour_fee + "' WHERE id = '" + position_id + "'";
+            String query = "UPDATE position SET name = '" + p.Name + "', description = '" + p.Description + "', hour_fee = '" + p.Hour_fee + "' WHERE id = '" + position_id + "'";
             try { employee_position.Insert(query); return true; }
             catch (Exception e)
             {
@@ -304,7 +306,7 @@ namespace Assignment_1
 
         public Boolean deletePosition(int position_id)
         {
-            String query = "DELETE FROM employee_position WHERE id = '" + position_id + "'";
+            String query = "DELETE FROM position WHERE id = '" + position_id + "'";
             try { employee_position.Delete(query); return true; }
             catch (Exception e)
             {
@@ -315,31 +317,31 @@ namespace Assignment_1
 
         public List<Position> getSingleProjectPositions(int project_id)
         {
-            String query = "SELECT DISTINCT id, name, description, hour_fee, project_id FROM employee_position WHERE project_id = '" + project_id + "'";
+            String query = "SELECT DISTINCT p.id, name, description, hour_fee FROM position AS p, employee_project_position AS ep WHERE p.id = ep.position_id AND ep.project_id = '" + project_id + "'";
             List<Position> result = employee_position.Select(query);
 
             return result;
         }
 
-        public List<User> getSingleProjectPositionEmployees(int project_id, Position p)
+        public List<User> getSingleProjectPositionEmployees(int project_id, int position_id)
         {
-            String query = "SELECT DISTINCT e.id, e.bsn, e.name, e.name, e.surname, e.headquarter_id FROM employee AS e, employee_position AS ep WHERE e.id = ep.employee_id AND ep.project_id = '" + project_id + "' AND ep.name = '" + p.Name.ToString() + "' AND ep.description = '" + p.Description.ToString() + "'";
+            String query = "SELECT DISTINCT e.id, e.bsn, e.name, e.name, e.surname, e.headquarter_id FROM employee AS e, employee_project_position AS ep WHERE e.id = ep.employee_id AND ep.project_id = '" + project_id + "' AND ep.position_id ='" + position_id + "'";
             List<User> result = user.Select(query);
 
             return result;
         }
 
-        public List<User> getAllUsersExceptCurrentPosition(int project_id, Position p)
+        public List<User> getAllUsersExceptCurrentPosition(int project_id, int position_id)
         {
-            String query = "SELECT DISTINCT e.id, e.bsn, e.name, e.name, e.surname, e.headquarter_id FROM employee AS e, employee_position AS ep WHERE ep.project_id != '" + project_id + "' AND ep.name != '" + p.Name.ToString() + "' AND ep.description != '" + p.Description.ToString() + "'";
+            String query = "SELECT e.* from employee AS e LEFT JOIN employee_project_position AS c ON e.id = c.employee_id WHERE c.employee_id IS NULL";
             List<User> result = user.Select(query);
 
             return result;
         }
 
-        public bool deleteUserPosition(int project_id, int employee_id, string name, string description)
+        public bool deleteUserPosition(int project_id, int employee_id, int position_id)
         {
-            String query = "DELETE FROM employee_position WHERE project_id = '" + project_id + "' AND employee_id = '" + employee_id + "' AND name = '" + name + "' AND description = '" + description + "'";
+            String query = "DELETE FROM employee_project_position WHERE project_id = '" + project_id + "' AND employee_id = '" + employee_id + "' AND position_id = '" + position_id + "'";
             try { employee_position.Update(query); return true; }
             catch (Exception e)
             {
@@ -347,6 +349,17 @@ namespace Assignment_1
                 return false;
             }
 
+        }
+
+        public bool addUserPosition(Employee_project_position ep)
+        {
+            String query = "INSERT INTO employee_project_position(project_id, employee_id, position_id) VALUES('" + ep.Project_id + "', '" + ep.Employee_id +"', '" + ep.Position_id + "')";
+            try { employee_position.Insert(query); return true; }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
+            }
         }
     }
 }

@@ -6,5 +6,6 @@ namespace Assignment_1
         public string Name { get; set; }
         public string Description { get; set; }
         public double Hour_fee { get; set; }
+        public int insertid { get; set; }
     }
 }

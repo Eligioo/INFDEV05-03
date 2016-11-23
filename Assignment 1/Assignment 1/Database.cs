@@ -59,9 +59,9 @@ namespace Assignment_1
 
                     if (columns.Contains(property.Name.ToLower()))
                     {
-                        if (sql_reader[property.Name] != DBNull.Value)
+                        if (sql_reader[property.Name.ToLower()] != DBNull.Value)
                         {
-                            readerValue = sql_reader[property.Name].ToString();
+                            readerValue = sql_reader[property.Name.ToLower()].ToString();
                         }
                     }
                     
@@ -78,12 +78,15 @@ namespace Assignment_1
             return resultList;
         }
 
-        public void Insert(string query)
+        public int Insert(string query)
         {
             sql_command.CommandText = query;
             connection.Open();
-            sql_command.ExecuteNonQuery();
+            //sql_command.ExecuteNonQuery();
+            sql_command.CommandText += "; SELECT CAST(scope_identity() AS int) AS idd";
+            var insertid = (int)sql_command.ExecuteScalar();
             connection.Close();
+            return insertid;
         }
         public void Update(string query)
         {

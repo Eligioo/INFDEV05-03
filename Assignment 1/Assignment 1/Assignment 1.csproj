@@ -122,6 +122,7 @@
     </Compile>
     <Compile Include="Models\Degree.cs" />
     <Compile Include="Models\Degree_employee.cs" />
+    <Compile Include="Models\Employee_project_position.cs" />
     <Compile Include="Models\Headquarter.cs" />
     <Compile Include="Models\Position.cs" />
     <Compile Include="Models\Project.cs" />

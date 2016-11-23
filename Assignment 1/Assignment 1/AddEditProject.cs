@@ -15,16 +15,17 @@ namespace Assignment_1
         DBHelper db1 = new DBHelper();
         Assignment_1.Project result;
         List<Headquarter> hqList = new List<Headquarter>();
-        private int projectId;
+        public int projectId;
 
-        public AddEditProject(int projectId)
+        public AddEditProject(int id)
         {
             InitializeComponent();
-            this.projectId = projectId;
-            if (this.projectId != 0)
+            this.projectId = id;
+            if (this.projectId == 0)
             {
-                GetProjectData(projectId);
+                this.projectId = db1.addProject(new Project());
             }
+            GetProjectData(projectId);
             GetHeadquartersData();
             GetPositionsData();
         }
@@ -75,29 +76,14 @@ namespace Assignment_1
             p.Buget = float.Parse(budgetTextBox.Text);
             p.Allocated_hours = float.Parse(allocatedHoursTextBox.Text);
             p.Headquarters_Id = Int32.Parse(comboBox1.SelectedValue.ToString());
-            if (projectId == 0)
+            if (db1.editProject(p, projectId))
             {
-                if (db1.addProject(p))
-                {
-                    MessageBox.Show("Project added");
-                    this.Close();
-                }
-                else
-                {
-                    MessageBox.Show("Adding went wrong.");
-                }
+                MessageBox.Show("Project is edited.");
+                this.Close();
             }
             else
             {
-                if (db1.editProject(p, projectId))
-                {
-                    MessageBox.Show("Project is edited.");
-                    this.Close();
-                }
-                else
-                {
-                    MessageBox.Show("Editing went wrong.");
-                }
+                MessageBox.Show("Editing went wrong.");
             }
         }
 
