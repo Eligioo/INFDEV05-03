@@ -64,6 +64,7 @@ namespace Assignment_1
 
         private void button2_Click_1(object sender, EventArgs e)
         {
+            db1.deleteProject(this.projectId);
             this.Close();
         }
 
@@ -73,17 +74,31 @@ namespace Assignment_1
         {
             Project p = new Project();
             p.Name = projectTextBox.Text;
-            p.Buget = float.Parse(budgetTextBox.Text);
-            p.Allocated_hours = float.Parse(allocatedHoursTextBox.Text);
-            p.Headquarters_Id = Int32.Parse(comboBox1.SelectedValue.ToString());
-            if (db1.editProject(p, projectId))
+            if (p.Name.TrimEnd().Length < 1)
             {
-                MessageBox.Show("Project is edited.");
-                this.Close();
+                MessageBox.Show("Enter a name");
             }
             else
             {
-                MessageBox.Show("Editing went wrong.");
+                p.Buget = float.Parse(budgetTextBox.Text);
+                p.Allocated_hours = float.Parse(allocatedHoursTextBox.Text);
+                if (comboBox1.SelectedValue == null)
+                {
+                    MessageBox.Show("Select a headquarter");
+                }
+                else
+                {
+                    p.Headquarters_Id = Int32.Parse(comboBox1.SelectedValue.ToString());
+                    if (db1.editProject(p, projectId))
+                    {
+                        MessageBox.Show("Project is edited.");
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Editing went wrong.");
+                    }
+                }
             }
         }
 
@@ -118,6 +133,14 @@ namespace Assignment_1
         {
             db1.deletePosition(int.Parse(listBox_positions.SelectedValue.ToString()));
             MessageBox.Show("The position has been deleted");
+        }
+
+        private void AddEditProject_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (projectTextBox.Text.TrimEnd().Length < 1 || comboBox1.SelectedValue == null)
+            {
+                db1.deleteProject(this.projectId);
+            }
         }
     }
 }

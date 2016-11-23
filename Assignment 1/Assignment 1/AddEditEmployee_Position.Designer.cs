@@ -188,6 +188,7 @@
             this.Name = "AddEditEmployee_Position";
             this.Text = "AddEditEmployee_Position";
             this.Activated += new System.EventHandler(this.AddEditEmployee_Position_Activated);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.AddEditEmployee_Position_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 

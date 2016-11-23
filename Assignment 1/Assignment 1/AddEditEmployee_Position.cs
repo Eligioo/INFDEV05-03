@@ -21,18 +21,25 @@ namespace Assignment_1
             InitializeComponent();
             this.position_id = position_id;
             this.project_id = project_id;
-            if (this.position_id != 0)
+            if (this.position_id == 0)
             {
                 //this.current_position = db.getSinglePosition(position_id)[0];
-                getPositionData();
+                this.position_id = db.addPosition(new Position(), project_id);
             }
+            getPositionData();
         }
 
         private void getPositionData()
         {
-            var result = db.getSinglePosition(position_id)[0];
-            textBox_name.Text = result.Name.TrimEnd();
-            textBox_description.Text = result.Description.TrimEnd();
+            var result = db.getSinglePosition(this.position_id)[0];
+            if (textBox_name.Text.TrimEnd().Length == 0)
+            {
+                textBox_name.Text = result.Name.TrimEnd();
+            }
+            if (result.Description != null)
+            {
+                textBox_description.Text = result.Description.TrimEnd();
+            }
             textBox_hour_fee.Text = result.Hour_fee.ToString();
 
             var all_users = db.getAllUsersExceptCurrentPosition(project_id, position_id);
@@ -52,7 +59,7 @@ namespace Assignment_1
         {
             if (this.position_id != 0)
             {
-                getPositionData();
+                //getPositionData();
             }
         }
 
@@ -79,7 +86,7 @@ namespace Assignment_1
         {
             if (listBox1.SelectedItems.Count == 1)
             {
-                db.deleteUserPosition(project_id, int.Parse(listBox1.SelectedValue.ToString()), position_id);
+                db.deleteUserPosition(this.project_id, int.Parse(listBox1.SelectedValue.ToString()), position_id);
             }
             else
             {
@@ -92,23 +99,44 @@ namespace Assignment_1
         private void savePositionButton_Click(object sender, EventArgs e)
         {
             Position position = new Position();
+            position.Id = this.position_id;
             position.Name = textBox_name.Text;
             position.Description = textBox_description.Text;
-            position.Hour_fee = int.Parse(textBox_hour_fee.Text);
-            if (position_id == 0)
+            if (position.Name.TrimEnd().Length < 1)
             {
-                db.addPosition(position, project_id);
+                MessageBox.Show("Enter a name");
+            }
+            else if (position.Description.TrimEnd().Length < 1)
+            {
+                MessageBox.Show("Enter a description");
             }
             else
             {
-                db.editPosition(position, position_id);
+                position.Hour_fee = int.Parse(textBox_hour_fee.Text);
+                if (db.editPosition(position, position_id))
+                {
+                    MessageBox.Show("Position was edited");
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Something went wrong");
+                }
             }
-            this.Close();
         }
 
         private void cancelPositionButton_Click(object sender, EventArgs e)
         {
+            db.deletePosition(this.position_id);
             this.Close();
+        }
+
+        private void AddEditEmployee_Position_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (textBox_name.Text.TrimEnd().Length < 1 || textBox_description.Text.TrimEnd().Length < 1)
+            {
+                db.deletePosition(this.position_id);
+            }
         }
     }
 }

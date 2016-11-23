@@ -79,7 +79,7 @@
             // projectTextBox
             // 
             this.projectTextBox.Location = new System.Drawing.Point(6, 24);
-            this.projectTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.projectTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.projectTextBox.Name = "projectTextBox";
             this.projectTextBox.Size = new System.Drawing.Size(120, 20);
             this.projectTextBox.TabIndex = 3;
@@ -87,7 +87,7 @@
             // budgetTextBox
             // 
             this.budgetTextBox.Location = new System.Drawing.Point(6, 75);
-            this.budgetTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.budgetTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.budgetTextBox.Name = "budgetTextBox";
             this.budgetTextBox.Size = new System.Drawing.Size(120, 20);
             this.budgetTextBox.TabIndex = 4;
@@ -95,7 +95,7 @@
             // allocatedHoursTextBox
             // 
             this.allocatedHoursTextBox.Location = new System.Drawing.Point(6, 127);
-            this.allocatedHoursTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.allocatedHoursTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.allocatedHoursTextBox.Name = "allocatedHoursTextBox";
             this.allocatedHoursTextBox.Size = new System.Drawing.Size(120, 20);
             this.allocatedHoursTextBox.TabIndex = 5;
@@ -103,7 +103,7 @@
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(6, 299);
-            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(56, 19);
             this.button1.TabIndex = 6;
@@ -114,7 +114,7 @@
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(68, 299);
-            this.button2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button2.Margin = new System.Windows.Forms.Padding(2);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(56, 19);
             this.button2.TabIndex = 7;
@@ -127,7 +127,7 @@
             this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(6, 195);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(120, 21);
             this.comboBox1.TabIndex = 8;
@@ -145,7 +145,7 @@
             // button3
             // 
             this.button3.Location = new System.Drawing.Point(147, 195);
-            this.button3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button3.Margin = new System.Windows.Forms.Padding(2);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(108, 20);
             this.button3.TabIndex = 10;
@@ -221,10 +221,11 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "AddEditProject";
             this.Text = "Project";
             this.Activated += new System.EventHandler(this.AddEditProject_Activated);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.AddEditProject_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 

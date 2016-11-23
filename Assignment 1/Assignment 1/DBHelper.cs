@@ -275,20 +275,20 @@ namespace Assignment_1
             return result;
         }
 
-        public Boolean addPosition(Position p, int project_id)
+        public int addPosition(Position p, int project_id)
         {
             String query = "INSERT INTO position(name, description, hour_fee) VALUES('" + p.Name + "', '" + p.Description + "', '" + p.Hour_fee + "')";
             try
             {
-                var insertid = (int)employee_position.Insert(query);
+                var insertid = employee_position.Insert(query);
                 String query_2 = "INSERT INTO employee_project_position(position_id, project_id, employee_id) VALUES('" + insertid + "', '" + project_id + "', '0')";
                 employee_position.Insert(query_2);
-                return true;
+                return insertid;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                return false;
+                return -1;
             }
         }
 
@@ -296,7 +296,7 @@ namespace Assignment_1
         {
             //update hq id not implemented yet
             String query = "UPDATE position SET name = '" + p.Name + "', description = '" + p.Description + "', hour_fee = '" + p.Hour_fee + "' WHERE id = '" + position_id + "'";
-            try { employee_position.Insert(query); return true; }
+            try { employee_position.Update(query); return true; }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
