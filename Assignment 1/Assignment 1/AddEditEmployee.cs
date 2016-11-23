@@ -28,7 +28,7 @@ namespace Assignment_1
             hq.Id = 2;
             hq.Building_name = "Harvard";
 
-            comboBox1.DataSource = new BindingSource(hq, null);
+            comboBox1.DataSource = new BindingSource(db1.getHeadquarterList(), null);
             comboBox1.DisplayMember = "Building_name";
             comboBox1.ValueMember = "Id";
             degreeListBox.DataSource = new BindingSource(db1.getSingleUserDegree(employee_id), null);
@@ -46,7 +46,7 @@ namespace Assignment_1
             name.Text = result.Name.TrimEnd();
             surname.Text = result.Surname.TrimEnd();
             bsn.Text = result.Bsn.ToString().TrimEnd();
-            this.employee_id = int.Parse(result.Id);
+            this.employee_id = result.Id;
         }
 
         private void CancelBtn_Click(object sender, EventArgs e)
@@ -57,13 +57,13 @@ namespace Assignment_1
         private void SaveBtn_Click(object sender, EventArgs e)
         {
             User u = new Assignment_1.User();
-            u.Bsn = bsn.Text;
+            u.Bsn = Int32.Parse(bsn.Text);
             u.Name = name.Text;
             u.Surname = surname.Text;
-            u.Id = null;
+            u.Id = 0;
             if (comboBox1.SelectedValue != null)
             {
-                u.Headquarter_Id = comboBox1.SelectedValue.ToString();
+                u.Headquarter_Id = Int32.Parse(comboBox1.SelectedValue);
             }
             if (employeeBsn == 0)
             {
@@ -95,7 +95,7 @@ namespace Assignment_1
             degreeListBox.ValueMember = "id";
             foreach (var residence in residences)
             {
-                if (residence.Current_residence == "True")
+                if (residence.Current_residence == true)
                 {
                     current_residence = residence;
                 }
@@ -117,11 +117,11 @@ namespace Assignment_1
                 {
                     if (int.Parse(residenceListbox.SelectedValue.ToString()) != residence.Id)
                     {
-                        residence.Current_residence = "False";
+                        residence.Current_residence = false;
                     }
                     else
                     {
-                        residence.Current_residence = "True";
+                        residence.Current_residence = true;
                     }
                     db1.editResidence(residence, residence.Id);
                 }
