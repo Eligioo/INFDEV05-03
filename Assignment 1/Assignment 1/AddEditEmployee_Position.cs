@@ -131,7 +131,7 @@ namespace Assignment_1
 
         private void cancelPositionButton_Click(object sender, EventArgs e)
         {
-
+            this.Close();
         }
     }
 }
