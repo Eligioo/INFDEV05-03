@@ -261,7 +261,7 @@ namespace Assignment_1
 
         public List<Position> getAllPositions()
         {
-            String query = "SELECT * FROM employee_position WHERE project_id = '0'";
+            String query = "SELECT DISTINCT name, description, hour_fee FROM employee_position WHERE project_id = '0'";
             List<Position> result = employee_position.Select(query);
 
             return result;
@@ -277,7 +277,7 @@ namespace Assignment_1
 
         public Boolean addPosition(Position p)
         {
-            String query = "INSERT INTO employee_position(name, description, hour_fee, employee_id, project_id) VALUES('" + p.Name + "', '" + p.Description + "', '" + p.Hour_fee + "', '" + 0 + "', '" + 0 + "')";
+            String query = "INSERT INTO employee_position(name, description, hour_fee, employee_id, project_id) VALUES('" + p.Name + "', '" + p.Description + "', '" + p.Hour_fee + "', '" + p.Employee_id + "', '" + p.Project_id + "')";
             try
             {
                 employee_position.Insert(query);
@@ -315,10 +315,38 @@ namespace Assignment_1
 
         public List<Position> getSingleProjectPositions(int project_id)
         {
-            String query = "SELECT * FROM employee_position WHERE project_id = '" + project_id + "'";
+            String query = "SELECT DISTINCT id, name, description, hour_fee, project_id FROM employee_position WHERE project_id = '" + project_id + "'";
             List<Position> result = employee_position.Select(query);
 
             return result;
+        }
+
+        public List<User> getSingleProjectPositionEmployees(int project_id, Position p)
+        {
+            String query = "SELECT DISTINCT e.id, e.bsn, e.name, e.name, e.surname, e.headquarter_id FROM employee AS e, employee_position AS ep WHERE e.id = ep.employee_id AND ep.project_id = '" + project_id + "' AND ep.name = '" + p.Name.ToString() + "' AND ep.description = '" + p.Description.ToString() + "'";
+            List<User> result = user.Select(query);
+
+            return result;
+        }
+
+        public List<User> getAllUsersExceptCurrentPosition(int project_id, Position p)
+        {
+            String query = "SELECT DISTINCT e.id, e.bsn, e.name, e.name, e.surname, e.headquarter_id FROM employee AS e, employee_position AS ep WHERE ep.project_id != '" + project_id + "' AND ep.name != '" + p.Name.ToString() + "' AND ep.description != '" + p.Description.ToString() + "'";
+            List<User> result = user.Select(query);
+
+            return result;
+        }
+
+        public bool deleteUserPosition(int project_id, int employee_id, string name, string description)
+        {
+            String query = "DELETE FROM employee_position WHERE project_id = '" + project_id + "' AND employee_id = '" + employee_id + "' AND name = '" + name + "' AND description = '" + description + "'";
+            try { employee_position.Update(query); return true; }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
+            }
+
         }
     }
 }

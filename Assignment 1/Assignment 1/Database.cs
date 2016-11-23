@@ -55,11 +55,16 @@ namespace Assignment_1
                 {
                     Type type = property.PropertyType;
                     string readerValue = string.Empty;
+                    var columns = Enumerable.Range(0, sql_reader.FieldCount).Select(sql_reader.GetName).ToList();
 
-                    if (sql_reader[property.Name] != DBNull.Value)
+                    if (columns.Contains(property.Name.ToLower()))
                     {
-                        readerValue = sql_reader[property.Name].ToString();
+                        if (sql_reader[property.Name] != DBNull.Value)
+                        {
+                            readerValue = sql_reader[property.Name].ToString();
+                        }
                     }
+                    
 
                     if (!string.IsNullOrEmpty(readerValue))
                     {

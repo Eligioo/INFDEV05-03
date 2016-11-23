@@ -115,12 +115,14 @@ namespace Assignment_1
 
         private void AddPositionButton_Click(object sender, EventArgs e)
         {
-
+            AddEditEmployee_Position AddEditEmployee_Position = new AddEditEmployee_Position(0, projectId);
+            AddEditEmployee_Position.Show();
         }
 
         private void editPositionButton_Click(object sender, EventArgs e)
         {
-
+            AddEditEmployee_Position AddEditEmployee_Position = new AddEditEmployee_Position(int.Parse(listBox_positions.SelectedValue.ToString()), projectId);
+            AddEditEmployee_Position.Show();
         }
 
         private void deletePositionButton_Click(object sender, EventArgs e)

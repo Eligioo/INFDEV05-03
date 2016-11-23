@@ -37,7 +37,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.savePositionButton = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.addUserButton = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.listBox2 = new System.Windows.Forms.ListBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -117,15 +117,17 @@
             this.savePositionButton.TabIndex = 8;
             this.savePositionButton.Text = "Save";
             this.savePositionButton.UseVisualStyleBackColor = true;
+            this.savePositionButton.Click += new System.EventHandler(this.savePositionButton_Click);
             // 
-            // button2
+            // addUserButton
             // 
-            this.button2.Location = new System.Drawing.Point(234, 195);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(89, 23);
-            this.button2.TabIndex = 9;
-            this.button2.Text = "<--";
-            this.button2.UseVisualStyleBackColor = true;
+            this.addUserButton.Location = new System.Drawing.Point(234, 195);
+            this.addUserButton.Name = "addUserButton";
+            this.addUserButton.Size = new System.Drawing.Size(89, 23);
+            this.addUserButton.TabIndex = 9;
+            this.addUserButton.Text = "<--";
+            this.addUserButton.UseVisualStyleBackColor = true;
+            this.addUserButton.Click += new System.EventHandler(this.addUserButton_Click);
             // 
             // button3
             // 
@@ -135,6 +137,7 @@
             this.button3.TabIndex = 10;
             this.button3.Text = "-->";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.removeUserButton_Click);
             // 
             // listBox2
             // 
@@ -161,6 +164,7 @@
             this.cancelPositionButton.TabIndex = 13;
             this.cancelPositionButton.Text = "Cancel";
             this.cancelPositionButton.UseVisualStyleBackColor = true;
+            this.cancelPositionButton.Click += new System.EventHandler(this.cancelPositionButton_Click);
             // 
             // AddEditEmployee_Position
             // 
@@ -171,7 +175,7 @@
             this.Controls.Add(this.listBox2);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.addUserButton);
             this.Controls.Add(this.savePositionButton);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.label4);
@@ -183,6 +187,7 @@
             this.Controls.Add(this.label1);
             this.Name = "AddEditEmployee_Position";
             this.Text = "AddEditEmployee_Position";
+            this.Activated += new System.EventHandler(this.AddEditEmployee_Position_Activated);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -199,7 +204,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Button savePositionButton;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button addUserButton;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.ListBox listBox2;
         private System.Windows.Forms.Label label5;
